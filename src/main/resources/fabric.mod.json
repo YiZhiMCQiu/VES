@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "ves",
+  "version": "0.0.3",
+  "name": "ves",
+  "description": "网易云音乐客户端模组",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "cn.yizhimcqiu.ves.client.VentiScriptModClient"
+    ],
+    "main": [
+      "cn.yizhimcqiu.ves.VentiScriptMod"
+    ]
+  },
+  "mixins": [
+    "ves.mixins.json",
+    {
+      "config": "ves.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
