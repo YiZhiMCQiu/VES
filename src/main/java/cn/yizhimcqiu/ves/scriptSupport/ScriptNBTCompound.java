@@ -1,5 +1,6 @@
 package cn.yizhimcqiu.ves.scriptSupport;
 
+import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.Map;
@@ -19,9 +20,11 @@ public class ScriptNBTCompound {
     public ScriptNBTCompound(ScriptEntity from) {
         this.nbt = from.getNBT().$_getNBT();
     }
+    @VESCallIgnore
     public NbtCompound $_getNBT() {
         return this.nbt;
     }
+    @VESCallIgnore
     public ScriptNBTCompound $_clone() {
         ScriptNBTCompound object = new ScriptNBTCompound(this.nbt.copy());
         object.parent = this.parent;

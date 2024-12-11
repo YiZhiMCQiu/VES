@@ -1,5 +1,6 @@
 package cn.yizhimcqiu.ves.scriptSupport;
 
+import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -52,8 +53,9 @@ public class ScriptServerPlayerEntity {
         player.changeGameMode(GameMode.byName(gameMode));
     }
     public void giveItem(ScriptItems item, int count) {
-        player.giveItemStack(new ItemStack(item.getItem(), count));
+        player.giveItemStack(new ItemStack(item.$_getItem(), count));
     }
+    @VESCallIgnore
     public ServerWorld $_getWorld() {
         return (ServerWorld) this.player.getWorld();
     }

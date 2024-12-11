@@ -1,5 +1,6 @@
 package cn.yizhimcqiu.ves.scriptSupport;
 
+import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -133,7 +134,8 @@ public enum ScriptEntities {
     ZOMBIE_HORSE,
     ZOMBIE_VILLAGER,
     ZOMBIFIED_PIGLIN;
-    public EntityType<?> getEntityType() {
+    @VESCallIgnore
+    public EntityType<?> $_getEntityType() {
         return Registries.ENTITY_TYPE.get(Identifier.ofVanilla(this.name().toLowerCase()));
     }
 }

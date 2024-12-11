@@ -16,7 +16,7 @@ public class ScriptEntity {
     }
     public boolean spawn(int x, int y, int z) {
         if (this.entity == null) {
-            this.entity = this.type.getEntityType().spawn(this.world, new BlockPos(x, y, z), SpawnReason.COMMAND);
+            this.entity = this.type.$_getEntityType().spawn(this.world, new BlockPos(x, y, z), SpawnReason.COMMAND);
             return true;
         } else {
             return false;

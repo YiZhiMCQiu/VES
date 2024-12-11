@@ -1,5 +1,6 @@
 package cn.yizhimcqiu.ves.scriptSupport;
 
+import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -1338,7 +1339,8 @@ public enum ScriptItems {
     VAULT,
     OMINOUS_BOTTLE,
     BREEZE_ROD;
-    public Item getItem() {
+    @VESCallIgnore
+    public Item $_getItem() {
         return Registries.ITEM.get(Identifier.ofVanilla(this.name().toLowerCase()));
     }
 }
