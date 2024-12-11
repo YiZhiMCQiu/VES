@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class ScriptNBTCompound {
     private NbtCompound nbt;
-    private NbtCompound parent;
+    private ScriptNBTCompound parent = null;
     private String subKey;
     public ScriptNBTCompound(NbtCompound nbt) {
         this.nbt = nbt;
@@ -21,6 +21,12 @@ public class ScriptNBTCompound {
     }
     public NbtCompound $_getNBT() {
         return this.nbt;
+    }
+    public ScriptNBTCompound $_clone() {
+        ScriptNBTCompound object = new ScriptNBTCompound(this.nbt.copy());
+        object.parent = this.parent;
+        object.subKey = this.subKey;
+        return object;
     }
     public ScriptNBTCompound putInt(String key, int value) {
         this.nbt.putInt(key, value);
@@ -51,16 +57,16 @@ public class ScriptNBTCompound {
         return this.nbt.getBoolean(key);
     }
     public ScriptNBTCompound sub(String key) {
-        this.parent = this.nbt;
+        this.parent = this.$_clone();
         this.nbt = this.nbt.getCompound(key);
         this.subKey = key;
         return this;
     }
     public ScriptNBTCompound parent() {
-        this.parent.put(this.subKey, this.nbt);
-        this.nbt = this.parent;
-        this.parent = null;
-        this.subKey = "";
+        this.parent.nbt.put(this.subKey, this.nbt);
+        this.nbt = this.parent.nbt;
+        this.subKey = this.parent.subKey;
+        this.parent = this.parent.parent;
         return this;
     }
     public void remove(String key) {
