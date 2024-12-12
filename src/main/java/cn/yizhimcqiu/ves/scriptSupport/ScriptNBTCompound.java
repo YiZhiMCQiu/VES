@@ -2,6 +2,7 @@ package cn.yizhimcqiu.ves.scriptSupport;
 
 import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 
 import java.util.Map;
 
@@ -19,6 +20,9 @@ public class ScriptNBTCompound {
     }
     public ScriptNBTCompound(ScriptEntity from) {
         this.nbt = from.getNBT().$_getNBT();
+    }
+    public ScriptNBTCompound() {
+        this.nbt = new NbtCompound();
     }
     @VESCallIgnore
     public NbtCompound $_getNBT() {
@@ -75,8 +79,24 @@ public class ScriptNBTCompound {
     public void remove(String key) {
         this.nbt.remove(key);
     }
-
-    public ScriptNBTCompound putMap(String key, Map<String, ?> map) {
+    public ScriptNBTCompound putList(String key, int... list) {
+        this.nbt.putIntArray(key, list);
+        return this;
+    }
+    public ScriptNBTCompound putList(String key, byte... list) {
+        this.nbt.putByteArray(key, list);
+        return this;
+    }
+    public ScriptNBTCompound putList(String key, long... list) {
+        this.nbt.putLongArray(key, list);
+        return this;
+    }
+    public ScriptNBTCompound putList(String key, ScriptNBTCompound... list) {
+        NbtList nbtList = new NbtList();
+        for (ScriptNBTCompound nbt : list) {
+            nbtList.add(nbt.nbt);
+        }
+        this.nbt.put(key, nbtList);
         return this;
     }
 }
