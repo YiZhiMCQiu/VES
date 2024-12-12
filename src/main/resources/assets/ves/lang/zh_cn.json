@@ -1,0 +1,7 @@
+{
+    "execute.feedback.fail": "执行失败",
+    "execute.feedback.success": "执行成功",
+    "screen.ves.settings": "Venti Script设置",
+
+    "info.ves.version": "版本：%s"
+}

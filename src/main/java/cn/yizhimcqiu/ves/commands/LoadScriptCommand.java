@@ -16,9 +16,9 @@ public class LoadScriptCommand {
                     boolean result = VEScriptLoader.defaultLoader.load(StringArgumentType.getString(context, "name"),
                             new CommandExecuteContext(context.getSource().getPlayer(), context.getSource())).success;
                     if (result) {
-                        context.getSource().sendFeedback(() -> Text.literal("加载成功"), false);
+                        context.getSource().sendFeedback(() -> Text.translatable("execute.feedback.success"), false);
                     } else {
-                        context.getSource().sendError(Text.literal("加载失败"));
+                        context.getSource().sendError(Text.translatable("execute.feedback.fail"));
                     }
                     return result ? 1 : 0;
                 }))));
