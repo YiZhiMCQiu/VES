@@ -4,8 +4,6 @@ import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 
-import java.util.Map;
-
 /**
  * 对脚本NBT操控的支持
  * @see ScriptNBTCompound#$_getNBT
