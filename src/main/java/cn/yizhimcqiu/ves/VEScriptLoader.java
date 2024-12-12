@@ -36,9 +36,9 @@ public class VEScriptLoader {
             }
         }
     }
-    public VESLoadContext load(String name, CommandExecuteContext executeContext) {
+    public VESLoadResult load(String name, CommandExecuteContext executeContext) {
         if (name.startsWith(".")) {
-            return new VESLoadContext(false, "Invalid script name", null);
+            return new VESLoadResult(false, "Invalid script name", null);
         }
         try {
             Source init = createSource(createFile(Path.of("ves", ".ves_builtin", "init.mjs").toAbsolutePath()));
@@ -50,12 +50,12 @@ public class VEScriptLoader {
 
             this.context.eval(init);
             loadedScripts.add(name);
-            return VESLoadContext.success(this.context.eval(source).toString());
+            return VESLoadResult.success(this.context.eval(source).toString());
         } catch (Exception e) {
             VentiScriptMod.LOGGER.error("Error while loading script: ", e);
-            return new VESLoadContext(false, e.getMessage(), e);
+            return new VESLoadResult(false, e.getMessage(), e);
         } catch (Error e) {
-            return new VESLoadContext(false, e.getMessage(), e);
+            return new VESLoadResult(false, e.getMessage(), e);
         }
     }
     private Source createSource(String script, String name) throws IOException {
@@ -70,17 +70,17 @@ public class VEScriptLoader {
     private File createFile(Path path) {
         return new File(path.toUri());
     }
-    public static class VESLoadContext {
+    public static class VESLoadResult {
         public final boolean success;
         public final String message;
         public final Throwable throwable;
-        VESLoadContext(boolean success, String message, Throwable throwable) {
+        VESLoadResult(boolean success, String message, Throwable throwable) {
             this.success = success;
             this.message = message;
             this.throwable = throwable;
         }
-        private static VESLoadContext success(String message) {
-            return new VESLoadContext(true, message, null);
+        private static VESLoadResult success(String message) {
+            return new VESLoadResult(true, message, null);
         }
     }
 }
