@@ -30,7 +30,6 @@ public abstract class OptionsScreenMixin extends Screen {
     @Unique private static final Text ACCESSIBILITY_TEXT = Text.translatable("options.accessibility");
     @Unique private static final Text VES_TEXT = Text.translatable("options.ves");
     @Unique private static final Text CREDITS_AND_ATTRIBUTION_TEXT = Text.translatable("options.credits_and_attribution");
-    @Unique private static final int COLUMNS = 2;
     protected OptionsScreenMixin(Text title) {
         super(title);
     }
