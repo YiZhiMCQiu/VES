@@ -37,5 +37,8 @@ replay_*.log
 *.hprof
 *.jfr
 
-#gradle
+# gradle
 gradle/wrapper/gradle-8.10.2-bin.zip
+
+# sourceCode
+sourceCode/
