@@ -1,0 +1,11 @@
+accessWidener	v1	named
+
+accessible field net/minecraft/client/gui/screen/option/OptionsScreen layout Lnet/minecraft/client/gui/widget/ThreePartsLayoutWidget;
+accessible field net/minecraft/client/gui/screen/Screen client Lnet/minecraft/client/MinecraftClient;
+accessible field net/minecraft/client/gui/screen/option/OptionsScreen settings Lnet/minecraft/client/option/GameOptions;
+accessible field net/minecraft/client/gui/screen/Screen textRenderer Lnet/minecraft/client/font/TextRenderer;
+
+accessible method net/minecraft/client/gui/screen/option/OptionsScreen refreshResourcePacks (Lnet/minecraft/resource/ResourcePackManager;)V
+accessible method net/minecraft/client/gui/screen/option/OptionsScreen createTopRightButton ()Lnet/minecraft/client/gui/widget/Widget;
+accessible method net/minecraft/client/gui/screen/option/OptionsScreen initTabNavigation ()V
+accessible method net/minecraft/client/gui/screen/Screen addDrawableChild (Lnet/minecraft/client/gui/Element;)Lnet/minecraft/client/gui/Element;

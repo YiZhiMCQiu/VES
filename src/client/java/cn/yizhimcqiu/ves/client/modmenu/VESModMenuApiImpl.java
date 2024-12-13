@@ -7,7 +7,7 @@ package cn.yizhimcqiu.ves.client.modmenu;
 
 import java.util.function.Consumer;
 
-public class VESModMenuApiImpl/* implements ModMenuApi*/ {
+public class VESModMenuApiImpl /*implements ModMenuApi*/ {
     //@Override
     public void attachModpackBadges(Consumer<String> consumer) {
         consumer.accept("modmenu");

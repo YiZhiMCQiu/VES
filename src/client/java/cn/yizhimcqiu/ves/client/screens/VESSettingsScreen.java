@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
@@ -16,7 +17,7 @@ public class VESSettingsScreen extends Screen {
     }
     @Override
     protected void init() {
-
+        this.addDrawableChild(ButtonWidget.builder(Text.translatable("info.ves.close"), button -> this.close()).build());
     }
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {

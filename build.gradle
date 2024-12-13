@@ -19,6 +19,7 @@ loom {
             sourceSet sourceSets.client
         }
     }
+    accessWidenerPath = file("src/client/resources/ves.accesswidener")
 }
 
 repositories {
