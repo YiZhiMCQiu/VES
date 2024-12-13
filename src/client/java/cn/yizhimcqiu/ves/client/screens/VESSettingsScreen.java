@@ -40,7 +40,7 @@ public class VESSettingsScreen extends Screen {
         int width = this.textRenderer.getWidth(VERSION_TEXT);
         context.drawText(this.textRenderer, VERSION_TEXT, this.width / 2 - width / 2, this.height / 8, 0xffffff, false);
         for (int i = 0;i < this.installedScripts.size();i++) {
-            context.drawText(this.textRenderer, Text.of(this.installedScripts.get(i)), 5, this.height / 8 + 5 + i, 0xffffff, false);
+            context.drawText(this.textRenderer, Text.of(this.installedScripts.get(i)), 5, this.height / 8 + 5 + i * this.textRenderer.fontHeight, 0xffffff, false);
         }
     }
     @Override
@@ -49,7 +49,7 @@ public class VESSettingsScreen extends Screen {
     }
     private List<String> getInstalledScripts() {
         try (Stream<Path> paths = Files.list(Paths.get("ves"))) {
-            return ListUtil.convertList(paths.filter(path -> Files.isDirectory(path) && !path.getFileName().startsWith(".")).toList(), path -> path.getFileName().toString());
+            return ListUtil.convertList(paths.filter(path -> Files.isDirectory(path) && !path.getFileName().toString().startsWith(".")).toList(), path -> path.getFileName().toString());
         } catch (IOException e) {
             e.printStackTrace();
             return new ArrayList<>();
