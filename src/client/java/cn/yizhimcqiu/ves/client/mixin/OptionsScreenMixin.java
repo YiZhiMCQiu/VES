@@ -1,11 +1,10 @@
 package cn.yizhimcqiu.ves.client.mixin;
 
-import cn.yizhimcqiu.ves.client.screens.VESSettingsScreen;
+import cn.yizhimcqiu.ves.client.gui.screens.VESSettingsScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.*;
 import net.minecraft.client.gui.screen.pack.PackScreen;
-import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
@@ -19,27 +18,41 @@ import java.util.function.Supplier;
 
 @Mixin(OptionsScreen.class)
 public abstract class OptionsScreenMixin extends Screen {
-    @Unique private static final Text TITLE_TEXT = Text.translatable("options.title");
-    @Unique private static final Text SKIN_CUSTOMIZATION_TEXT = Text.translatable("options.skinCustomisation");
-    @Unique private static final Text SOUNDS_TEXT = Text.translatable("options.sounds");
-    @Unique private static final Text VIDEO_TEXT = Text.translatable("options.video");
-    @Unique private static final Text CONTROL_TEXT = Text.translatable("options.controls");
-    @Unique private static final Text LANGUAGE_TEXT = Text.translatable("options.language");
-    @Unique private static final Text CHAT_TEXT = Text.translatable("options.chat");
-    @Unique private static final Text RESOURCE_PACK_TEXT = Text.translatable("options.resourcepack");
-    @Unique private static final Text ACCESSIBILITY_TEXT = Text.translatable("options.accessibility");
-    @Unique private static final Text VES_TEXT = Text.translatable("options.ves");
-    @Unique private static final Text CREDITS_AND_ATTRIBUTION_TEXT = Text.translatable("options.credits_and_attribution");
+    @Unique
+    private static final Text TITLE_TEXT = Text.translatable("options.title");
+    @Unique
+    private static final Text SKIN_CUSTOMIZATION_TEXT = Text.translatable("options.skinCustomisation");
+    @Unique
+    private static final Text SOUNDS_TEXT = Text.translatable("options.sounds");
+    @Unique
+    private static final Text VIDEO_TEXT = Text.translatable("options.video");
+    @Unique
+    private static final Text CONTROL_TEXT = Text.translatable("options.controls");
+    @Unique
+    private static final Text LANGUAGE_TEXT = Text.translatable("options.language");
+    @Unique
+    private static final Text CHAT_TEXT = Text.translatable("options.chat");
+    @Unique
+    private static final Text RESOURCE_PACK_TEXT = Text.translatable("options.resourcepack");
+    @Unique
+    private static final Text ACCESSIBILITY_TEXT = Text.translatable("options.accessibility");
+    @Unique
+    private static final Text VES_TEXT = Text.translatable("options.ves");
+    @Unique
+    private static final Text CREDITS_AND_ATTRIBUTION_TEXT = Text.translatable("options.credits_and_attribution");
+
     protected OptionsScreenMixin(Text title) {
         super(title);
     }
+
     @Unique
     private ButtonWidget createButton(Text message, Supplier<Screen> screenSupplier) {
         return ButtonWidget.builder(message, (button) -> MinecraftClient.getInstance().setScreen(screenSupplier.get())).build();
     }
+
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     private void init(CallbackInfo ci) {
-        OptionsScreen self = (OptionsScreen)((Object) this);
+        OptionsScreen self = (OptionsScreen) ((Object) this);
         DirectionalLayoutWidget directionalLayoutWidget = self.layout.addHeader(DirectionalLayoutWidget.vertical().spacing(8));
         directionalLayoutWidget.add(new TextWidget(TITLE_TEXT, self.textRenderer), Positioner::alignHorizontalCenter);
         DirectionalLayoutWidget directionalLayoutWidget2 = directionalLayoutWidget.add(DirectionalLayoutWidget.horizontal()).spacing(8);
@@ -62,9 +75,7 @@ public abstract class OptionsScreenMixin extends Screen {
         self.layout.addFooter(ButtonWidget.builder(ScreenTexts.DONE, (button) -> {
             self.close();
         }).width(200).build());
-        self.layout.forEachChild((element) -> {
-            ClickableWidget var10000 = self.addDrawableChild(element);
-        });
+        self.layout.forEachChild(self::addDrawableChild);
         self.initTabNavigation();
         ci.cancel();
     }
