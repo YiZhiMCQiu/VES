@@ -4,12 +4,14 @@ import cn.yizhimcqiu.ves.VESManifest;
 import cn.yizhimcqiu.ves.VESVersion;
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import cn.yizhimcqiu.ves.client.VentiScriptModClient;
+import cn.yizhimcqiu.ves.client.gui.widgets.ScriptListWidget;
 import cn.yizhimcqiu.ves.utils.ListUtil;
 import com.google.gson.Gson;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -32,6 +34,7 @@ public class VESSettingsScreen extends Screen {
     private final Screen parent;
     private List<String> installedScripts;
     private List<VESManifest> scripts;
+    private ScriptListWidget scriptList;
     public VESSettingsScreen(Screen parent) {
         super(Text.translatable("options.ves"));
         this.parent = parent;
@@ -40,11 +43,19 @@ public class VESSettingsScreen extends Screen {
     }
     @Override
     protected void init() {
-        this.addDrawableChild(ButtonWidget.builder(Text.of("x"), button -> this.close()).build());
+        this.scriptList = new ScriptListWidget(this.client, this.width - 20, this.height - 40, 20, 32);
+        this.scriptList.init(this.scripts);
+        ButtonWidget updateButton =  this.addDrawableChild(ButtonWidget.builder(Text.of("更新"),
+                button -> VentiScriptMod.updateVES()).build());
+        if (!VentiScriptMod.isDevelop) {
+            updateButton.active = false;
+            updateButton.setTooltip(Tooltip.of(Text.of("error.ves.is_not_develop")));
+        }
     }
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
+        this.scriptList.render(context, mouseX, mouseY, delta);
         this.renderText(context);
         this.renderIcon(context);
     }
@@ -92,10 +103,15 @@ public class VESSettingsScreen extends Screen {
             }
             try (FileReader reader = new FileReader(manifest)) {
                 VESManifest manifestData = gson.fromJson(reader, VESManifest.class);
-
+                this.scripts.add(manifestData);
+                VentiScriptModClient.LOGGER.info("Loaded {}'s manifest", id);
             } catch (IOException e) {
                 VentiScriptModClient.LOGGER.error("Failed to load manifest.json", e);
             }
         }
+//        VESManifest manifest = new VESManifest();
+//        for (int i = 0;i < 50;i++) {
+//            this.scripts.add(manifest);
+//        }
     }
 }

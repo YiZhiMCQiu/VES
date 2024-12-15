@@ -9,36 +9,20 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VEScriptLoader {
+public class VEScriptExecutor {
     public static final List<String> loadedScripts = new ArrayList<>();
     public static final String VERSION = "0.0.3";
-    public static VEScriptLoader defaultLoader = new VEScriptLoader();
+    public static VEScriptExecutor defaultLoader = new VEScriptExecutor();
     private Context context;
-    public VEScriptLoader() {
+    public VEScriptExecutor() {
         this.initContext();
     }
     public void initContext() {
         this.context = Context.newBuilder("js").allowAllAccess(true).build();
     }
-    @Deprecated(forRemoval = true)
-    public static void loads() throws IOException {
-        File scriptFolder = new File("ves");
-        VEScriptLoader loader = new VEScriptLoader();
-        loader.context.eval(loader.createSource("console.info(\"._VES version "+VERSION+"\");", "init.mjs"));
-        if (!scriptFolder.exists()) {
-            scriptFolder.mkdir();
-        }
-        for (File file : scriptFolder.listFiles()) {
-            if (file.isDirectory()) {
-                if (!file.getName().startsWith(".")) {
-                    //loader.load(file.getName());
-                }
-            }
-        }
-    }
-    public VESLoadResult load(String name, CommandExecuteContext executeContext) {
+    public VESExecuteResult execute(String name, CommandExecuteContext executeContext) {
         if (name.startsWith(".")) {
-            return new VESLoadResult(false, "Invalid script name", null);
+            return new VESExecuteResult(false, "Invalid script name", null);
         }
         try {
             Source init = createSource(createFile(Path.of("ves", ".ves_builtin", "init.mjs").toAbsolutePath()));
@@ -50,12 +34,12 @@ public class VEScriptLoader {
 
             this.context.eval(init);
             loadedScripts.add(name);
-            return VESLoadResult.success(this.context.eval(source).toString());
+            return VESExecuteResult.success(this.context.eval(source).toString());
         } catch (Exception e) {
             VentiScriptMod.LOGGER.error("Error while loading script: ", e);
-            return new VESLoadResult(false, e.getMessage(), e);
+            return new VESExecuteResult(false, e.getMessage(), e);
         } catch (Error e) {
-            return new VESLoadResult(false, e.getMessage(), e);
+            return new VESExecuteResult(false, e.getMessage(), e);
         }
     }
     private Source createSource(String script, String name) throws IOException {
@@ -70,17 +54,17 @@ public class VEScriptLoader {
     private File createFile(Path path) {
         return new File(path.toUri());
     }
-    public static class VESLoadResult {
+    public static class VESExecuteResult {
         public final boolean success;
         public final String message;
         public final Throwable throwable;
-        VESLoadResult(boolean success, String message, Throwable throwable) {
+        VESExecuteResult(boolean success, String message, Throwable throwable) {
             this.success = success;
             this.message = message;
             this.throwable = throwable;
         }
-        private static VESLoadResult success(String message) {
-            return new VESLoadResult(true, message, null);
+        private static VESExecuteResult success(String message) {
+            return new VESExecuteResult(true, message, null);
         }
     }
 }

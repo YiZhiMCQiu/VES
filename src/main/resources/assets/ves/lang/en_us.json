@@ -1,7 +1,9 @@
 {
     "execute.feedback.fail": "Execute failed",
     "execute.feedback.success": "Execute succeed",
+    "execute.feedback.start": "The thread task has been started to execute %s",
     "options.ves": "Venti Script settings",
 
-    "info.ves.version": "Version: %s"
+    "info.ves.version": "Version: %s",
+    "error.ves.is_not_develop": "当前不是开发环境, 因此无法从本地更新VES"
 }

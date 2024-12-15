@@ -9,7 +9,7 @@ public class VESManifest {
     public String name;
     public String version = "1.0.0";
     public String description = "";
-    public String iconPath;
+    public String icon;
     public Text getNameAsText() {
         return Text.of(this.name);
     }

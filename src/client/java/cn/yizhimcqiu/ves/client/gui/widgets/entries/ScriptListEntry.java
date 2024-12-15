@@ -1,7 +1,8 @@
-package cn.yizhimcqiu.ves.client.gui.widget.entries;
+package cn.yizhimcqiu.ves.client.gui.widgets.entries;
 
 import cn.yizhimcqiu.ves.VESManifest;
 import cn.yizhimcqiu.ves.client.VentiScriptModClient;
+import cn.yizhimcqiu.ves.client.gui.widgets.ScriptListWidget;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
@@ -23,18 +24,26 @@ public class ScriptListEntry extends AlwaysSelectedEntryListWidget.Entry<ScriptL
     public static final Identifier UNKNOWN_ICON = Identifier.ofVanilla("textures/misc/unknown_pack.png");
     private Identifier iconIdentifier;
     private final VESManifest manifest;
-    public ScriptListEntry(VESManifest manifest) {
+    private final ScriptListWidget list;
+    private boolean selecting = false;
+    private final MinecraftClient client;
+    public ScriptListEntry(VESManifest manifest, ScriptListWidget list) {
         this.manifest = manifest;
+        this.list = list;
+        this.client = MinecraftClient.getInstance();
     }
     public Identifier getIconIdentifier() {
         if (this.iconIdentifier != null) {
             return this.iconIdentifier;
         }
-        if (this.manifest.iconPath == null) {
+        this.iconIdentifier = UNKNOWN_ICON;
+        if (this.manifest.icon == null) {
+            VentiScriptModClient.LOGGER.error("Cannot find key \"icon\" in {}.manifest!", this.manifest.id);
             return UNKNOWN_ICON;
         }
-        Path iconPath = this.manifest.getFolderPath().resolve(this.manifest.iconPath);
+        Path iconPath = this.manifest.getFolderPath().resolve(this.manifest.icon);
         if (!Files.exists(iconPath) || Files.isDirectory(iconPath)) {
+            VentiScriptModClient.LOGGER.error("{} is not exist!", iconPath);
             return UNKNOWN_ICON;
         }
         Identifier identifier = Identifier.of(this.manifest.id, "icon");
@@ -65,5 +74,18 @@ public class ScriptListEntry extends AlwaysSelectedEntryListWidget.Entry<ScriptL
     }
     private void drawTexture(DrawContext context, int x, int y, int w, int h, Identifier texture, float mul) {
         context.drawTexture(texture, x, y, 0, 0, (int)(w * mul), (int)(h * mul), (int)(w * mul), (int)(h * mul));
+    }
+    private void renderText(DrawContext context) {
+        context.drawText(this.client.textRenderer, this.manifest.getNameAsText(), 32, 32, 0xffffff, true);
+    }
+
+    public boolean isSelecting() {
+        return this.selecting;
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.list.select(this);
+        return true;
     }
 }
