@@ -2,6 +2,7 @@ package cn.yizhimcqiu.ves.core.scanner;
 
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -41,7 +42,7 @@ public class VESSupportModsScanner {
         }
         Gson gson = new Gson();
         try {
-            Map fmj = gson.fromJson(Files.readString(fmjPath), Map.class);
+            Map<String, Object> fmj = gson.fromJson(Files.readString(fmjPath), new TypeToken<>(){});
             if (!fmj.containsKey("ves")) {
                 VentiScriptMod.LOGGER.debug("{} is not supported VES", fmj.get("id"));
                 return null;
