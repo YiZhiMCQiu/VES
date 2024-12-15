@@ -5,7 +5,7 @@ import cn.yizhimcqiu.ves.VESVersion;
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import cn.yizhimcqiu.ves.client.VentiScriptModClient;
 import cn.yizhimcqiu.ves.client.gui.widgets.ScriptListWidget;
-import cn.yizhimcqiu.ves.utils.ListUtil;
+import cn.yizhimcqiu.ves.util.ListUtil;
 import com.google.gson.Gson;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -32,7 +32,7 @@ public class VESSettingsScreen extends Screen {
     private static final Identifier ICON_IDENTIFIER = Identifier.of(VentiScriptMod.MOD_ID, "icon.png");
     private static final Text VERSION_TEXT = Text.translatable("info.ves.version", VESVersion.VERSION);
     private final Screen parent;
-    private List<String> installedScripts;
+    private final List<String> installedScripts;
     private List<VESManifest> scripts;
     private ScriptListWidget scriptList;
     public VESSettingsScreen(Screen parent) {

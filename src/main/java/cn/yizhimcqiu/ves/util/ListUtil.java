@@ -1,4 +1,4 @@
-package cn.yizhimcqiu.ves.utils;
+package cn.yizhimcqiu.ves.util;
 
 import java.util.ArrayList;
 import java.util.List;

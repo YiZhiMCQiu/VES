@@ -1,5 +1,8 @@
-package cn.yizhimcqiu.ves;
+package cn.yizhimcqiu.ves.core;
 
+import cn.yizhimcqiu.ves.CommandExecuteContext;
+import cn.yizhimcqiu.ves.VentiScriptMod;
+import cn.yizhimcqiu.ves.core.scanner.VESSupportModsScanner;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
 
@@ -8,10 +11,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class VEScriptExecutor {
-    public static final List<String> loadedScripts = new ArrayList<>();
     public static final String VERSION = "0.0.3";
+    public static final Map<String, Path> MOD_VES_PATHS = VESSupportModsScanner.scan();
     public static VEScriptExecutor defaultLoader = new VEScriptExecutor();
     private Context context;
     public VEScriptExecutor() {
@@ -25,22 +29,36 @@ public class VEScriptExecutor {
             return new VESExecuteResult(false, "Invalid script name", null);
         }
         try {
-            Source init = createSource(createFile(Path.of("ves", ".ves_builtin", "init.mjs").toAbsolutePath()));
-            Source source = createSource(createFile(Path.of("ves", name, "main.mjs").toAbsolutePath()));
-
-            context.getBindings("js").putMember("context", executeContext);
-            context.getBindings("js").putMember("IS_DEVELOP", VentiScriptMod.isDevelop);
-            context.getBindings("js").putMember("builtin", "(name)=>\"../.ves/builtin/\"+name+\".mjs\"");
-
-            this.context.eval(init);
-            loadedScripts.add(name);
-            return VESExecuteResult.success(this.context.eval(source).toString());
+            return execute(createSource(createFile(Path.of("ves", name, "main.mjs").toAbsolutePath())), executeContext);
         } catch (Exception e) {
             VentiScriptMod.LOGGER.error("Error while loading script: ", e);
             return new VESExecuteResult(false, e.getMessage(), e);
         } catch (Error e) {
             return new VESExecuteResult(false, e.getMessage(), e);
         }
+    }
+    public VESExecuteResult execute(Path path, CommandExecuteContext executeContext) {
+        if (path.getFileName().startsWith(".")) {
+            return new VESExecuteResult(false, "Invalid script name", null);
+        }
+        try {
+            return execute(createSource(createFile(path.toAbsolutePath())), executeContext);
+        } catch (Exception e) {
+            VentiScriptMod.LOGGER.error("Error while loading script: ", e);
+            return new VESExecuteResult(false, e.getMessage(), e);
+        } catch (Error e) {
+            return new VESExecuteResult(false, e.getMessage(), e);
+        }
+    }
+    private VESExecuteResult execute(Source source, CommandExecuteContext context) throws IOException {
+        Source init = createSource(createFile(Path.of("ves", ".ves_builtin", "init.mjs").toAbsolutePath()));
+
+        this.context.getBindings("js").putMember("context", context);
+        this.context.getBindings("js").putMember("IS_DEVELOP", VentiScriptMod.isDevelop);
+        this.context.getBindings("js").putMember("builtin", "(name)=>\"../.ves/builtin/\"+name+\".mjs\"");
+
+        this.context.eval(init);
+        return VESExecuteResult.success(this.context.eval(source).toString());
     }
     private Source createSource(String script, String name) throws IOException {
         return Source.newBuilder("js", script, name).mimeType("application/javascript+module").build();
@@ -67,4 +85,5 @@ public class VEScriptExecutor {
             return new VESExecuteResult(true, message, null);
         }
     }
+    public static void initialize() { };
 }

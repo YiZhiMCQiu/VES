@@ -1,6 +1,7 @@
 package cn.yizhimcqiu.ves;
 
 import cn.yizhimcqiu.ves.commands.LoadScriptCommand;
+import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ public class VentiScriptMod implements ModInitializer {
             LOGGER.info("Development environment detected");
             updateVES();
         }
+        VEScriptExecutor.initialize();
     }
     private void registerCommands() {
         new LoadScriptCommand().register();
