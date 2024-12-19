@@ -1,5 +1,6 @@
 package cn.yizhimcqiu.ves.scriptSupport;
 
+import cn.yizhimcqiu.ves.scriptSupport.world.ScriptWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.NbtCompound;
@@ -7,12 +8,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
 public class ScriptEntity {
-    private final ScriptEntities type;
-    private Entity entity = null;
-    private ServerWorld world;
-    public ScriptEntity(ScriptEntities type, ScriptServerPlayerEntity player) {
+    protected final ScriptEntities type;
+    protected Entity entity = null;
+    protected ServerWorld world;
+    public ScriptEntity(ScriptEntities type, ScriptWorld world) {
         this.type = type;
-        this.world = player.$_getWorld();
+        this.world = world.$_getWorld();
     }
     public boolean spawn(int x, int y, int z) {
         if (this.entity == null) {
@@ -50,6 +51,15 @@ public class ScriptEntity {
             return true;
         }
     }
+    public double getX() {
+        return entity.getX();
+    }
+    public double getY() {
+        return entity.getY();
+    }
+    public double getZ() {
+        return entity.getZ();
+    }
     public boolean setPosition(int x, int y, int z) {
         return this.setPosition(x, y,(double) z);
     }
@@ -59,5 +69,8 @@ public class ScriptEntity {
     public void mergeNBT(ScriptNBTCompound nbt) {
         this.entity.writeNbt(nbt.$_getNBT());
         this.entity.readNbt(nbt.$_getNBT());
+    }
+    public ScriptWorld getWorld() {
+        return new ScriptWorld((ServerWorld) this.entity.getWorld());
     }
 }

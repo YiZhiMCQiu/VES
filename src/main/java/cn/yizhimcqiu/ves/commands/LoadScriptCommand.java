@@ -15,39 +15,55 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class LoadScriptCommand {
+    private static final SuggestionProvider<ServerCommandSource> SUGGESTION_PROVIDER = createSuggestionProvider();
     public void register() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("loadscript")
-                .then(argument("name", StringArgumentType.greedyString()).suggests(createSuggestionProvider()).executes(context -> {
-                    AtomicBoolean result = new AtomicBoolean(true);
+                .then(argument("name", StringArgumentType.greedyString()).suggests(SUGGESTION_PROVIDER).executes(context -> {
+                    final VEScriptExecutor.VESExecuteResult[] result = { null };
                     String name = StringArgumentType.getString(context, "name");
                     context.getSource().sendFeedback(() -> Text.translatable("execute.feedback.start", name), false);
                     new Thread(() -> {
-                        Supplier<VEScriptExecutor.VESExecuteResult> sup;
                         CommandExecuteContext cec = new CommandExecuteContext(context.getSource().getPlayer(), context.getSource());
-                        if (name.split("::")[0].equals("ves")) {
-                            sup = () -> VEScriptExecutor.defaultLoader.execute(name.split("::")[1], cec);
-                        } else {
-                            sup = () -> VEScriptExecutor.defaultLoader.execute(VEScriptExecutor.MOD_VES_PATHS.get(name.split("::")[0]), cec);
-                        }
+                        Supplier<VEScriptExecutor.VESExecuteResult> sup = () -> VEScriptExecutor.defaultLoader.execute(name.split("::")[0], name.split("::")[1], cec);
                         VEScriptExecutor.defaultLoader.initContext();
-                        result.set(sup.get().success);
-                        if (result.get()) {
+                        result[0] = sup.get();
+                        if (result[0].success) {
                             context.getSource().sendFeedback(() -> Text.translatable("execute.feedback.success"), false);
                         } else {
-                            context.getSource().sendError(Text.translatable("execute.feedback.fail"));
+                            context.getSource().sendError(Text.translatable("execute.feedback.fail", result[0].message));
                         }
                     }).start();
-                    return result.get() ? 1 : 0;
+                    return 1;
                 }))));
     }
     private static SuggestionProvider<ServerCommandSource> createSuggestionProvider() {
         return (context, builder) -> {
-            VEScriptExecutor.MOD_VES_PATHS.keySet().forEach(name -> builder.suggest(name+"::main"));
+            try (Stream<Path> scriptFolders = Files.list(Path.of("ves")).filter(path ->
+                    !(path.getFileName().toString().charAt(0) == '.') && path.toFile().isDirectory())) {
+                for (Path path : scriptFolders.toList()) {
+                    for (File file : path.toFile().listFiles()) {
+                        if (file.isFile() && file.getName().split("\\.")[1].equals("mjs")) {
+                            String s = path.getFileName() + "::" + file.getName().substring(0, file.getName().lastIndexOf('.'));
+                            if (s.startsWith(builder.getInput()) || builder.getInput().isEmpty()) {
+                                builder.suggest(s);
+                            }
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             return CompletableFuture.supplyAsync(builder::build);
         };
     }

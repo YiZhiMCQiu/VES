@@ -1,5 +1,5 @@
 {
-    "execute.feedback.fail": "执行失败",
+    "execute.feedback.fail": "执行失败, %s",
     "execute.feedback.success": "执行成功",
     "execute.feedback.start": "已开启多线程任务来执行%s",
     "options.ves": "Venti Script...",

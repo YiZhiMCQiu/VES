@@ -4,6 +4,8 @@ import cn.yizhimcqiu.ves.commands.LoadScriptCommand;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.block.Block;
+import net.minecraft.registry.Registries;
 import org.slf4j.Logger;
 
 import java.io.IOException;

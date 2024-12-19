@@ -1,11 +1,4 @@
-export var logger = console;
-var _default_info = console.info;
-logger.info = (text) => {
-    if (typeof text == "object") {
-        text = JSON.stringify(text);
-    }
-    _default_info("._"+text);
+import { CommandExecuteContext } from "funcapi.mjs";
+export function getContext() {
+    return new CommandExecuteContext(_context);
 }
-console = undefined;
-
-const VERSION = "0.0.2"

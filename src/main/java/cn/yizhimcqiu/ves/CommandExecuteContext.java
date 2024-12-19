@@ -7,10 +7,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class CommandExecuteContext {
     public final ScriptServerPlayerEntity player;
     public final ScriptServerCommandSource commandSource;
-    public CommandExecuteContext(ScriptServerPlayerEntity player, ScriptServerCommandSource commandSource) {
-        this.player = player;
-        this.commandSource = commandSource;
-    }
     public CommandExecuteContext(ServerPlayerEntity player, ServerCommandSource commandSource) {
         this.player = new ScriptServerPlayerEntity(player);
         this.commandSource = new ScriptServerCommandSource(commandSource);
