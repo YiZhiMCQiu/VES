@@ -23,7 +23,7 @@ public class ScriptWorld {
         this.world.setBlockState(new BlockPos(x, y, z), block.$_getBlock().getDefaultState());
     }
     public void setBlock(double x, double y, double z, ScriptBlocks block) {
-        this.setBlock(Math.round(x), Math.round(y), Math.round(z), block);
+        this.setBlock((int) Math.round(x),(int) Math.round(y), (int) Math.round(z), block);
     }
     public ScriptBlocks getBlockAt(int x, int y, int z) {
         return ScriptBlocks.getBlock(this.world.getBlockState(new BlockPos(x, y, z)).getBlock());
