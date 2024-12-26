@@ -2,15 +2,13 @@ package cn.yizhimcqiu.ves.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class ListUtil {
-    public interface ListConverter<T, E> {
-        T convert(E e);
-    }
-    public static <T, E> List<T> convertList(List<E> list, ListConverter<T, E> converter) {
+    public static <T, E> List<T> convertList(List<E> list, Function<E, T> converter) {
         List<T> result = new ArrayList<>();
         for (E e : list) {
-            result.add(converter.convert(e));
+            result.add(converter.apply(e));
         }
         return result;
     }
