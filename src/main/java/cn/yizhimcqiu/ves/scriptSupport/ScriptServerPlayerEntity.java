@@ -7,7 +7,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
-
+@SuppressWarnings("unused")
 public class ScriptServerPlayerEntity extends ScriptEntity {
     public ScriptServerPlayerEntity(ServerPlayerEntity serverPlayer) {
         super(null, new ScriptWorld((ServerWorld) serverPlayer.getWorld()));

@@ -6,7 +6,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-
+@SuppressWarnings("unused")
 public class ScriptEntity {
     protected final ScriptEntities type;
     protected Entity entity = null;

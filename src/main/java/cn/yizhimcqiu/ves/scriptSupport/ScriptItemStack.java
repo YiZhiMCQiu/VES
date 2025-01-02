@@ -3,6 +3,7 @@ package cn.yizhimcqiu.ves.scriptSupport;
 import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.item.ItemStack;
 
+@SuppressWarnings("unused")
 public class ScriptItemStack {
     private final ScriptItems item;
     private int count;

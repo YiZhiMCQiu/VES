@@ -2,7 +2,7 @@ package cn.yizhimcqiu.ves.scriptSupport;
 
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
-
+@SuppressWarnings("unused")
 public class ScriptServerCommandSource {
     private final ServerCommandSource commandSource;
     public ScriptServerCommandSource(ServerCommandSource commandSource) {

@@ -8,7 +8,7 @@ import net.minecraft.nbt.NbtList;
  * 对脚本NBT操控的支持
  * @see ScriptNBTCompound#$_getNBT
  */
-
+@SuppressWarnings("unused")
 public class ScriptNBTCompound {
     private NbtCompound nbt;
     private ScriptNBTCompound parent = null;

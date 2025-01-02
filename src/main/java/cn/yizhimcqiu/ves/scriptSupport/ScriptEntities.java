@@ -4,7 +4,7 @@ import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-
+@SuppressWarnings("unused")
 public enum ScriptEntities {
     ALLAY,
     AREA_EFFECT_CLOUD,

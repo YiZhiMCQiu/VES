@@ -3,17 +3,20 @@ package cn.yizhimcqiu.ves.core;
 import cn.yizhimcqiu.ves.CommandExecuteContext;
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import org.graalvm.polyglot.Context;
-import org.graalvm.polyglot.Engine;
 import org.graalvm.polyglot.Source;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class VEScriptExecutor {
-    public static final String VERSION = "0.0.3";
     public static VEScriptExecutor defaultLoader = new VEScriptExecutor();
+    public static final List<String> SCRIPT_IDENTIFIERS = new ArrayList<>();
     private Context context;
     public VEScriptExecutor() {
         this.initContext();
@@ -75,5 +78,19 @@ public class VEScriptExecutor {
             return new VESExecuteResult(true, message, null);
         }
     }
-    public static void initialize() { }
+    public static void initialize() {
+        try (Stream<Path> scriptFolders = Files.list(Path.of("ves")).filter(path ->
+                !(path.getFileName().toString().charAt(0) == '.') && path.toFile().isDirectory())) {
+            for (Path path : scriptFolders.toList()) {
+                for (File file : Objects.requireNonNull(path.toFile().listFiles())) {
+                    if (file.isFile() && file.getName().split("\\.")[1].equals("mjs")) {
+                        String s = path.getFileName() + "::" + file.getName().substring(0, file.getName().lastIndexOf('.'));
+                        SCRIPT_IDENTIFIERS.add(s);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

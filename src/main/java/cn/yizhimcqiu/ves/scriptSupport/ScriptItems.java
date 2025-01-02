@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
+@SuppressWarnings("unused")
 public enum ScriptItems {
     AIR,
     STONE,

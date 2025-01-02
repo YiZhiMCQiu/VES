@@ -99,3 +99,16 @@ export class Player extends Entity {
         this.instance.giveItem(item, count);
     }
 }
+
+/**
+ * Usage: 
+ * (async function() {
+ *     <You>
+ * })
+ * @param {number} ms 
+ * @returns A Promise to let you achieve the delay effect.
+ */
+export function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+  
