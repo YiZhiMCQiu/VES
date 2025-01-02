@@ -13,10 +13,10 @@ import net.minecraft.text.Text;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-public class LoadScriptCommand {
+public class ExecuteScriptCommand {
     private static final SuggestionProvider<ServerCommandSource> SUGGESTION_PROVIDER = createSuggestionProvider();
     public void register() {
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("loadscript")
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("execscript")
                 .then(argument("name", StringArgumentType.greedyString()).suggests(SUGGESTION_PROVIDER).executes(context -> {
                     final VEScriptExecutor.VESExecuteResult[] result = { null };
                     String name = StringArgumentType.getString(context, "name");
