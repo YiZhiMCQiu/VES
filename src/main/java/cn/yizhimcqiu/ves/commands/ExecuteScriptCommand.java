@@ -9,7 +9,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 
@@ -33,7 +32,7 @@ public class ExecuteScriptCommand {
                             context.getSource().sendFeedback(() -> Text.translatable("execute.feedback.success"), false);
                         } else {
                             context.getSource().sendError(Text.translatable("execute.feedback.fail"));
-                            MutableText errorMessage = VineExecuteExceptionHandler.createErrorMessage(result[0].throwable, (ServerPlayerEntity) context.getSource().getEntity());
+                            MutableText errorMessage = VineExecuteExceptionHandler.createErrorMessage(result[0].throwable);
                             HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal(result[0].throwable.getMessage()).styled((style1) -> style1.withColor(Formatting.RED)));
                             errorMessage = errorMessage.styled(style -> style.withHoverEvent(hoverEvent));
                             context.getSource().sendMessage(errorMessage);
