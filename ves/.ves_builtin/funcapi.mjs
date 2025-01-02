@@ -4,6 +4,7 @@ export const Blocks = Java.type("cn.yizhimcqiu.ves.scriptSupport.world.block.Scr
 // export const Entity = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptEntity")
 export const EntityTypes = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptEntities")
 export const NbtCompound = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptNBTCompound")
+export const Color = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptChatColor")
 
 export class CommandExecuteContext {
     constructor(instance) {
@@ -103,7 +104,8 @@ export class Player extends Entity {
 /**
  * Usage: 
  * (async function() {
- *     <You>
+ *     <Your code here>
+ *     await delay(xxx);
  * })
  * @param {number} ms 
  * @returns A Promise to let you achieve the delay effect.

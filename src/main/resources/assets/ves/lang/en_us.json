@@ -1,9 +1,15 @@
 {
-    "execute.feedback.fail": "Execute failed, %s",
+    "execute.feedback.fail": "Execute failed",
     "execute.feedback.success": "Execute succeed",
     "execute.feedback.start": "The thread task has been started to execute %s",
     "options.ves": "Venti Script settings",
 
     "info.ves.version": "Version: %s",
-    "error.ves.is_not_develop": "当前不是开发环境, 因此无法从本地更新VES"
+    "error.ves.is_not_develop": "It is not a development environment at present, so VES cannot be updated locally.",
+
+    "vine.errorMessage.promise_hint": "Asynchronous related code is used, ",
+    "vine.errorMessage.is_not_a_function": "Errors caused by incorrect calls. Check whether the dependent version and VES version meet the requirements, and contact the script author if necessary.",
+    "vine.errorMessage.is_not_defined": "Errors may be caused by lack of dependencies or incorrect versions.",
+    "vine.errorMessage.error_reading": "It is very likely that the instruction is called abnormally. Normally, you should only call the script in the suggestion list.",
+    "vine.errorMessage.not_happened": "The Vine error processor was triggered, and it seems that no error occurred, or an unexpected error occurred?"
 }

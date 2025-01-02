@@ -3,6 +3,7 @@ package cn.yizhimcqiu.ves.core;
 import cn.yizhimcqiu.ves.CommandExecuteContext;
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import org.graalvm.polyglot.Context;
+import org.graalvm.polyglot.PolyglotException;
 import org.graalvm.polyglot.Source;
 
 import java.io.*;
@@ -36,19 +37,20 @@ public class VEScriptExecutor {
         }
         try {
             return execute(createSource(createFile(path.toAbsolutePath())), executeContext);
-        } catch (Exception e) {
-            VentiScriptMod.LOGGER.error("Error while loading script: ", e);
-            return new VESExecuteResult(false, e.getMessage(), e);
-        } catch (Error e) {
-            return new VESExecuteResult(false, e.getMessage(), e);
+        } catch (Throwable t) {
+            VentiScriptMod.LOGGER.error("Error while loading script: ", t);
+            return new VESExecuteResult(false, t.getMessage(), t);
         }
     }
     private VESExecuteResult execute(Source source, CommandExecuteContext context) {
         this.context.getBindings("js").putMember("_context", context);
         this.context.getBindings("js").putMember("IS_DEVELOP", VentiScriptMod.isDevelop);
         this.context.getBindings("js").putMember("builtin", "(name)=>\"../.ves/builtin/\"+name+\".mjs\"");
-
-        return VESExecuteResult.success(this.context.eval(source).toString());
+        String res = this.context.eval(source).toString();
+        if (res.contains("[[PromiseStatus]]: \"rejected\"")) {
+            throw new RuntimeException("Promise is rejected: "+res);
+        }
+        return VESExecuteResult.success(res);
     }
     private Source createSource(String script, String name) throws IOException {
         return Source.newBuilder("js", script, name)

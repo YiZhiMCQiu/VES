@@ -1,9 +1,15 @@
 {
-    "execute.feedback.fail": "执行失败, %s",
+    "execute.feedback.fail": "执行失败",
     "execute.feedback.success": "执行成功",
     "execute.feedback.start": "已开启多线程任务来执行%s",
     "options.ves": "Venti Script...",
 
     "info.ves.version": "版本：%s",
-    "error.ves.is_not_develop": "当前不是开发环境, 因此无法从本地更新VES"
+    "error.ves.is_not_develop": "当前不是开发环境, 因此无法从本地更新VES",
+
+    "vine.errorMessage.promise_hint": "使用了异步相关代码，",
+    "vine.errorMessage.is_not_a_function": "错误调用导致的错误。检查依赖版本和VES版本是否符合要求，必要时联系脚本作者",
+    "vine.errorMessage.is_not_defined": "可能是因为缺少依赖或版本不正确导致的错误",
+    "vine.errorMessage.error_reading": "极大概率是指令调用不正常，你只应该调用Tab列表里的脚本",
+    "vine.errorMessage.not_happened": "Vine错误处理器被触发，看起来并没有错误发生，或者出现了意料之外的错误?"
 }

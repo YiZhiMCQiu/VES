@@ -1,10 +1,12 @@
-import { Blocks, delay } from ".ves_builtin/funcapi.mjs";
+import { Color, CommandExecuteContext } from ".ves_builtin/funcapi.mjs";
 import { getContext } from ".ves_builtin/init.mjs";
 
-(async function(){const context = getContext();
+(async function(){
+var options = [];
+if (IS_DEVELOP) {
+    options.push(Color.LIGHT_RED+"开发"+Color.RESET);
+}
 
-const world = context.getPlayer().getWorld();
-world.setBlock(context.getPlayer().getX(), context.getPlayer().getY(), context.getPlayer().getZ(), Blocks.TNT);
-context.getPlayer().sendMessage("调用delay");
-await delay(1000);
-context.getPlayer().sendMessage("delay结束");})()
+const context = getContext();
+context.getPlayersendMessage(Color.BLUE+"["+"AWA"+"] "+Color.GREEN+"脚本已加载, 环境情况:"+options)
+})()
