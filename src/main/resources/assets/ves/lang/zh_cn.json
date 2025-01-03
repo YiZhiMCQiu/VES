@@ -8,9 +8,9 @@
     "error.ves.is_not_develop": "当前不是开发环境, 因此无法从本地更新VES",
 
     "vine.errorMessage.promise_hint": "使用了异步相关代码，",
-    "vine.errorMessage.is_not_a_function": "错误调用导致的错误。检查依赖版本和VES版本是否符合要求，必要时联系脚本作者",
+    "vine.errorMessage.is_not_a_function": "可能是因为版本或语法错误导致的错误，检查依赖和VES版本无误后若依然存在，请联系脚本作者",
     "vine.errorMessage.is_not_defined": "可能是因为缺少依赖或版本不正确导致的错误",
     "vine.errorMessage.error_reading": "极大概率是指令调用不正常，你只应该调用Tab列表里的脚本",
     "vine.errorMessage.not_happened": "Vine错误处理器被触发，看起来并没有错误发生，或者出现了意料之外的错误?",
-    "vine.errorMessage.reference_error": "脚本出现问题，或极小概率出现版本问题，请联系脚本开发者"
+    "vine.errorMessage.reference_error": "可能是因为缺少依赖或版本不正确导致的错误"
 }
