@@ -4,9 +4,9 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
 public class VineExecuteExceptionHandler {
-    private static final String PREFIX = "[§c§lVINE§r] ";
+
     public static MutableText createErrorMessage(Throwable t) {
-        MutableText message = Text.of(PREFIX).copy();
+        MutableText message = Text.of(Vine.PREFIX).copy();
         String errorMessage = t.getMessage();
         if (errorMessage.contains("Promise is rejected")) {
             message.append(Text.translatable("vine.errorMessage.promise_hint"));
@@ -25,7 +25,7 @@ public class VineExecuteExceptionHandler {
             message.append(Text.translatable("vine.errorMessage.reference_error"));
         }
 
-        if (message.equals(Text.of(PREFIX))) {
+        if (message.equals(Text.of(Vine.PREFIX))) {
             return message.append(Text.translatable("vine.errorMessage.not_happened"));
         }
         return message;

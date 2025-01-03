@@ -1,9 +1,10 @@
 package cn.yizhimcqiu.ves.core;
 
 import cn.yizhimcqiu.ves.CommandExecuteContext;
+import cn.yizhimcqiu.ves.VESManifest;
 import cn.yizhimcqiu.ves.VentiScriptMod;
+import com.google.gson.Gson;
 import org.graalvm.polyglot.Context;
-import org.graalvm.polyglot.PolyglotException;
 import org.graalvm.polyglot.Source;
 
 import java.io.*;
@@ -94,5 +95,22 @@ public class VEScriptExecutor {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static VESManifest readManifest(String sid) {
+        Gson gson = new Gson();
+        Path scriptFolder = Path.of("ves", sid.split("::")[0]);
+        File manifest = scriptFolder.resolve("manifest.json").toFile();
+        if (!manifest.exists()) {
+            VentiScriptMod.LOGGER.error("{} is not exist", manifest);
+        }
+        if (manifest.isDirectory()) {
+            VentiScriptMod.LOGGER.error("{} is not a file", manifest);
+        }
+        try (FileReader reader = new FileReader(manifest)) {
+            return gson.fromJson(reader, VESManifest.class);
+        } catch (IOException e) {
+            VentiScriptMod.LOGGER.error("Failed to load manifest.json", e);
+        }
+        return null;
     }
 }

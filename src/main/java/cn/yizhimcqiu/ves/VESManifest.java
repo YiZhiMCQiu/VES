@@ -4,12 +4,14 @@ import net.minecraft.text.Text;
 
 import java.nio.file.Path;
 
+@SuppressWarnings("unused")
 public class VESManifest {
     public String id;
     public String name;
     public String version = "1.0.0";
     public String description = "";
     public String icon;
+    public String[] requires;
     public Text getNameAsText() {
         return Text.of(this.name);
     }
