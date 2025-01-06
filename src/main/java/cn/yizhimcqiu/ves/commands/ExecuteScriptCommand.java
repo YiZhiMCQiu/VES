@@ -2,11 +2,13 @@ package cn.yizhimcqiu.ves.commands;
 
 import static net.minecraft.server.command.CommandManager.*;
 
+import cn.yizhimcqiu.ves.VentiScriptMod;
 import cn.yizhimcqiu.ves.core.VESCommandHandler;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.ServerCommandSource;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,6 +19,11 @@ public class ExecuteScriptCommand {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("execscript")
                 .then(argument("sid", StringArgumentType.greedyString()).suggests(SUGGESTION_PROVIDER).executes(context -> {
                     VESCommandHandler.onCommand(context);
+                    try {
+                        context.getSource().getPlayer().giveItemStack(new ItemStack(VentiScriptMod.customItem));
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
                     return 1;
                 }))));
     }

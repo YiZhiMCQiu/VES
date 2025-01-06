@@ -5,6 +5,7 @@ export const Blocks = Java.type("cn.yizhimcqiu.ves.scriptSupport.world.block.Scr
 export const EntityTypes = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptEntities")
 export const NbtCompound = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptNBTCompound")
 export const Color = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptChatColor")
+export const Registry = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptRegistry")
 
 export class CommandExecuteContext {
     constructor(instance) {

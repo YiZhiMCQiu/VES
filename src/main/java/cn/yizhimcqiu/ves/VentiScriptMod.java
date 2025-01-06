@@ -1,9 +1,17 @@
 package cn.yizhimcqiu.ves;
 
+import cn.yizhimcqiu.ves.ci.CustomItemManager;
 import cn.yizhimcqiu.ves.commands.ExecuteScriptCommand;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
+import cn.yizhimcqiu.ves.items.CustomItem;
+import cn.yizhimcqiu.ves.items.components.VESDataComponentTypes;
 import com.mojang.logging.LogUtils;
+import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -13,10 +21,21 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class VentiScriptMod implements ModInitializer {
     public static final String MOD_ID = "ves";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static CustomItem customItem;
     public static boolean isDevelop = false;
     @Override
     public void onInitialize() {
         this.registerCommands();
+        this.updateEnvironment();
+
+        VEScriptExecutor.initialize();
+        VESDataComponentTypes.initialize();
+        CustomItemManager.initialize();
+
+        customItem = CustomItem.register();
+    }
+
+    private void updateEnvironment() {
         try {
             Class.forName("net.minecraft.class_2561");
         } catch (ClassNotFoundException e) {
@@ -24,8 +43,8 @@ public class VentiScriptMod implements ModInitializer {
             LOGGER.info("Development environment detected");
             updateVES();
         }
-        VEScriptExecutor.initialize();
     }
+
     private void registerCommands() {
         new ExecuteScriptCommand().register();
     }
