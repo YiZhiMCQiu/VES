@@ -42,3 +42,5 @@ gradle/wrapper/gradle-8.10.2-bin.zip
 
 # sourceCode
 sourceCode/
+
+/lib
