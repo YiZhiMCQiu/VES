@@ -6,18 +6,25 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
 @SuppressWarnings("unused")
 public class ScriptEntity {
     protected final ScriptEntities type;
     protected Entity entity = null;
-    protected ServerWorld world;
+    protected World world;
     public ScriptEntity(ScriptEntities type, ScriptWorld world) {
         this.type = type;
         this.world = world.$_getWorld();
     }
+    public ScriptEntity(Entity entity, ScriptEntities type) {
+        this.entity = entity;
+        this.type = type;
+        this.world = entity.getWorld();
+    }
     public boolean spawn(int x, int y, int z) {
-        if (this.entity == null) {
-            this.entity = this.type.$_getEntityType().spawn(this.world, new BlockPos(x, y, z), SpawnReason.COMMAND);
+        if (this.entity == null && this.world instanceof ServerWorld serverWorld) {
+            this.entity = this.type.$_getEntityType().spawn(serverWorld, new BlockPos(x, y, z), SpawnReason.COMMAND);
             return true;
         } else {
             return false;

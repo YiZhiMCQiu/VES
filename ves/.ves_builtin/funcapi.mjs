@@ -6,6 +6,8 @@ export const EntityTypes = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptEnti
 export const NbtCompound = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptNBTCompound")
 export const Color = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptChatColor")
 export const Registry = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptRegistry")
+export const CustomItemEntry = Java.type("cn.yizhimcqiu.ves.ci.CustomItemManager").CustomItemEntry
+export const ActionResult = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptActionResults")
 
 export class CommandExecuteContext {
     constructor(instance) {

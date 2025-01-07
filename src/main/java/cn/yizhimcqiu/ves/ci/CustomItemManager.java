@@ -1,9 +1,6 @@
 package cn.yizhimcqiu.ves.ci;
 
-import cn.yizhimcqiu.ves.scriptSupport.ScriptActionResults;
-import cn.yizhimcqiu.ves.scriptSupport.ScriptItemStack;
-import cn.yizhimcqiu.ves.scriptSupport.ScriptItems;
-import cn.yizhimcqiu.ves.scriptSupport.ScriptServerPlayerEntity;
+import cn.yizhimcqiu.ves.scriptSupport.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,42 +13,49 @@ public class CustomItemManager {
     public static CustomItemEntry getEntry(String id) {
         return registeredItems.getOrDefault(id, new CustomItemEntry.Builder().build());
     }
-    public record CustomItemEntry(String name, String description, UseProtocol onUse, ScriptItems texture) {
+    public record CustomItemEntry(String name, String description, UseProtocol onServerUse, ClientUseProtocol onClientUse, ScriptItems texture) {
         public static class Builder {
-                private String name = "undefined";
-                private String description = "";
-                private UseProtocol onUse = UseProtocol.EMPTY;
-                private ScriptItems texture = ScriptItems.GLOW_INK_SAC;
+            private String name = "undefined";
+            private String description = "";
+            private UseProtocol onServerUse = UseProtocol.EMPTY;
+            private ClientUseProtocol onClientUse = ClientUseProtocol.EMPTY;
+            private ScriptItems texture = ScriptItems.GLOW_INK_SAC;
 
             public Builder withName(String name) {
-                    this.name = name;
-                    return this;
-                }
+                this.name = name;
+                return this;
+            }
 
             public Builder withDescription(String description) {
-                    this.description = description;
-                    return this;
-                }
+                this.description = description;
+                return this;
+            }
 
-            public Builder onUse(UseProtocol onUse) {
-                    this.onUse = onUse;
-                    return this;
-                }
+            public Builder onUse(UseProtocol onServerUse, ClientUseProtocol onClientUse) {
+                this.onServerUse = onServerUse;
+                this.onClientUse = onClientUse;
+                return this;
+            }
 
             public Builder withTexture(ScriptItems item) {
-                    this.texture = item;
-                    return this;
-                }
+                this.texture = item;
+                return this;
+            }
 
             public CustomItemEntry build() {
-                    return new CustomItemEntry(name, description, onUse, texture);
-                }
+                return new CustomItemEntry(name, description, onServerUse, onClientUse, texture);
             }
         }
+    }
     @FunctionalInterface
     public interface UseProtocol {
         ScriptActionResults onUse(ScriptItemStack stack, ScriptServerPlayerEntity player);
         UseProtocol EMPTY = (arg1, arg2) -> ScriptActionResults.PASS;
+    }
+    @FunctionalInterface
+    public interface ClientUseProtocol {
+        ScriptActionResults onUse(ScriptItemStack stack, ScriptEntity player);
+        ClientUseProtocol EMPTY = (arg1, arg2) -> ScriptActionResults.PASS;
     }
     public static void initialize() {
         registeredItems.put("custom_apple", new CustomItemEntry.Builder().withName("Test!").withDescription("原始人的第一个苹果").withTexture(ScriptItems.APPLE).build());
