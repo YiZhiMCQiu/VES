@@ -1,7 +1,7 @@
 {
     "id": "ves",
     "name": "VentiScript加载器",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "description": "VentiScript加载器(测试版本), 所有VES的依赖",
     "icon": "icon.png"
 }

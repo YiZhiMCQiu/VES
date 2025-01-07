@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "ves",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "name": "Venti Script",
   "description": "Venti Script加载器",
   "icon": "assets/ves/icon.png",

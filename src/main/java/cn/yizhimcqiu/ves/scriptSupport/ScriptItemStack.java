@@ -16,13 +16,19 @@ public class ScriptItemStack {
         this.stack = stack;
     }
     public int getCount() {
-        return count;
+        return this.stack.getCount();
     }
     public ScriptItems getItem() {
         return item;
     }
     public void setCount(int count) {
         this.stack.setCount(count);
+    }
+    public void add(int count) {
+        this.stack.increment(count);
+    }
+    public void remove(int count) {
+        this.stack.decrement(count);
     }
     public ScriptItemStack custom(String id) {
         CustomItem.makeCustom(this, id);
