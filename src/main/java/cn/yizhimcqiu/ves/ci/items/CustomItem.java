@@ -1,8 +1,8 @@
-package cn.yizhimcqiu.ves.items;
+package cn.yizhimcqiu.ves.ci.items;
 
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import cn.yizhimcqiu.ves.ci.CustomItemManager;
-import cn.yizhimcqiu.ves.items.components.VESDataComponentTypes;
+import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptEntities;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptEntity;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptItemStack;
@@ -56,7 +56,7 @@ public class CustomItem extends Item {
         return CustomItemManager.getEntry(stack.getOrDefault(VESDataComponentTypes.CUSTOM_ITEM_TYPE, "missing"));
     }
     public static ItemStack createCustomItem(String id) {
-        ItemStack stack = new ItemStack(VentiScriptMod.customItem);
+        ItemStack stack = new ItemStack(CustomItemManager.CUSTOM_ITEM);
         stack.set(VESDataComponentTypes.CUSTOM_ITEM_TYPE, id);
         return stack;
     }

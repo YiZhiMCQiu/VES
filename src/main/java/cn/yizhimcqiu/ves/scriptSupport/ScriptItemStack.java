@@ -1,7 +1,7 @@
 package cn.yizhimcqiu.ves.scriptSupport;
 
 import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
-import cn.yizhimcqiu.ves.items.CustomItem;
+import cn.yizhimcqiu.ves.ci.items.CustomItem;
 import net.minecraft.item.ItemStack;
 
 @SuppressWarnings("unused")

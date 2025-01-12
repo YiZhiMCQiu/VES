@@ -1,4 +1,4 @@
-import { Color, CommandExecuteContext, Registry, CustomItemEntry, Items, ActionResult } from ".ves_builtin/funcapi.mjs";
+import { Color, CommandExecuteContext, Registry, CustomItemEntry, Items, ActionResult, delay } from ".ves_builtin/funcapi.mjs";
 import { getContext } from ".ves_builtin/init.mjs";
 
 var options = [];
@@ -13,4 +13,5 @@ Registry.registerItem("diamond_pack", new CustomItemEntry.Builder().withName("�
     stack.remove(1);
     return ActionResult.SUCCESS
 }, (stack, player)=>ActionResult.SUCCESS).build());
-
+delay(1000)
+context.getPlayer().sendMessage("delay结束");

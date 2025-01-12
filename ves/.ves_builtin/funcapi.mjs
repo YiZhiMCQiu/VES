@@ -104,16 +104,7 @@ export class Player extends Entity {
     }
 }
 
-/**
- * Usage: 
- * (async function() {
- *     <Your code here>
- *     await delay(xxx);
- * })
- * @param {number} ms 
- * @returns A Promise to let you achieve the delay effect.
- */
 export function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    Java.type("cn.yizhimcqiu.ves.util.ScriptUtil").delay(ms);
 }
   

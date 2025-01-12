@@ -1,7 +1,7 @@
 package cn.yizhimcqiu.ves.client.mixin;
 
-import cn.yizhimcqiu.ves.VentiScriptMod;
-import cn.yizhimcqiu.ves.items.CustomItem;
+import cn.yizhimcqiu.ves.ci.CustomItemManager;
+import cn.yizhimcqiu.ves.ci.items.CustomItem;
 import net.minecraft.client.render.item.ItemModels;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.item.Item;
@@ -19,7 +19,7 @@ public class ItemModelsMixin {
         if (stack.getItem() instanceof CustomItem customItem) {
             Item textureItem = customItem.getTextureItem(stack);
             BakedModel returnValue;
-            cir.setReturnValue((returnValue = self.getModel(textureItem)) == null ? self.getModel(VentiScriptMod.customItem) : returnValue);
+            cir.setReturnValue((returnValue = self.getModel(textureItem)) == null ? self.getModel(CustomItemManager.CUSTOM_ITEM) : returnValue);
         }
     }
 }

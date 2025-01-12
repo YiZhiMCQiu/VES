@@ -1,4 +1,4 @@
-package cn.yizhimcqiu.ves.items.components;
+package cn.yizhimcqiu.ves.ci.items.components;
 
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import com.mojang.serialization.Codec;

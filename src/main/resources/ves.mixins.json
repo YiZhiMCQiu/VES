@@ -4,7 +4,8 @@
     "package": "cn.yizhimcqiu.ves.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
-
+        "BlockStateMixin",
+        "RegistrySyncManagerMixin"
     ],
     "injectors": {
         "defaultRequire": 1

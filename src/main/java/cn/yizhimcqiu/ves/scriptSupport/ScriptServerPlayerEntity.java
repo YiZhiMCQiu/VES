@@ -48,6 +48,9 @@ public class ScriptServerPlayerEntity extends ScriptEntity {
     public void giveItem(ScriptItems item, int count) {
         ((ServerPlayerEntity)entity).giveItemStack(new ItemStack(item.$_getItem(), count));
     }
+    public void giveItem(ScriptItemStack stack) {
+        ((ServerPlayerEntity)entity).giveItemStack(stack.$_getItemStack());
+    }
     public ServerPlayerEntity $_getPlayer() {
         return (ServerPlayerEntity) entity;
     }

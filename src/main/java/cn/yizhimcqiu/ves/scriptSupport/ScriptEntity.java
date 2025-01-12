@@ -78,6 +78,6 @@ public class ScriptEntity {
         this.entity.readNbt(nbt.$_getNBT());
     }
     public ScriptWorld getWorld() {
-        return new ScriptWorld((ServerWorld) this.entity.getWorld());
+        return new ScriptWorld((ServerWorld) this.world);
     }
 }

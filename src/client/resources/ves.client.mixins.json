@@ -1,13 +1,15 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "cn.yizhimcqiu.ves.client.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "client": [
-    "OptionsScreenMixin",
-    "ItemModelsMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
+    "required": true,
+    "minVersion": "0.8",
+    "package": "cn.yizhimcqiu.ves.client.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "client": [
+        "BlockModelsMixin",
+        "ItemModelsMixin",
+        "MinecraftClientMixin",
+        "OptionsScreenMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
   }
 }

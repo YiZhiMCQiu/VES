@@ -1,11 +1,14 @@
 package cn.yizhimcqiu.ves.ci;
 
+import cn.yizhimcqiu.ves.ci.items.CustomItem;
 import cn.yizhimcqiu.ves.scriptSupport.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class CustomItemManager {
+    public static final CustomItem CUSTOM_ITEM = CustomItem.register();
     private static final Map<String, CustomItemEntry> registeredItems = new HashMap<>();
     public static void register(String id, CustomItemEntry entry) {
         registeredItems.put(id, entry);
@@ -58,6 +61,6 @@ public class CustomItemManager {
         ClientUseProtocol EMPTY = (arg1, arg2) -> ScriptActionResults.PASS;
     }
     public static void initialize() {
-        registeredItems.put("custom_apple", new CustomItemEntry.Builder().withName("Test!").withDescription("原始人的第一个苹果").withTexture(ScriptItems.APPLE).build());
+
     }
 }
