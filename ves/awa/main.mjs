@@ -13,5 +13,4 @@ Registry.registerItem("diamond_pack", new CustomItemEntry.Builder().withName("�
     stack.remove(1);
     return ActionResult.SUCCESS
 }, (stack, player)=>ActionResult.SUCCESS).build());
-delay(1000)
 context.getPlayer().sendMessage("delay结束");

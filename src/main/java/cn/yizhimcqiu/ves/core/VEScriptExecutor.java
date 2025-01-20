@@ -33,7 +33,7 @@ public class VEScriptExecutor {
         return this.execute(Path.of("ves", namespace, name+".mjs").toAbsolutePath(), executeContext);
     }
     public VESExecuteResult execute(Path path, CommandExecuteContext executeContext) {
-        if (path.getFileName().startsWith(".")) {
+        if (this.isInvalidScriptName(path)) {
             return new VESExecuteResult(false, "Invalid script name", null);
         }
         try {
@@ -42,6 +42,9 @@ public class VEScriptExecutor {
             VentiScriptMod.LOGGER.error("Error while loading script: ", t);
             return new VESExecuteResult(false, t.getMessage(), t);
         }
+    }
+    protected boolean isInvalidScriptName(Path path) {
+        return path.getFileName().startsWith(".");
     }
     private VESExecuteResult execute(Source source, CommandExecuteContext context) {
         this.context.getBindings("js").putMember("_context", context);

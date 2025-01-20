@@ -4,7 +4,6 @@ import cn.yizhimcqiu.ves.ci.CustomItemManager;
 import cn.yizhimcqiu.ves.commands.ExecuteScriptCommand;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
-import cn.yizhimcqiu.ves.util.ModPersistentStates;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -27,8 +26,6 @@ public class VentiScriptMod implements ModInitializer {
         VESDataComponentTypes.initialize();
 
         CustomItemManager.initialize();
-
-        ServerLifecycleEvents.SERVER_STARTED.register((server -> ModPersistentStates.instance = ModPersistentStates.getServerState(server)));
     }
 
     private void updateEnvironment() {

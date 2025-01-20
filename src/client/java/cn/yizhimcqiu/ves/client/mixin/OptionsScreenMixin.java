@@ -9,6 +9,7 @@ import net.minecraft.client.gui.widget.*;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,6 +19,8 @@ import java.util.function.Supplier;
 
 @Mixin(OptionsScreen.class)
 public abstract class OptionsScreenMixin extends Screen {
+    @Shadow public abstract void close();
+
     @Unique
     private static final Text TITLE_TEXT = Text.translatable("options.title");
     @Unique
@@ -53,6 +56,7 @@ public abstract class OptionsScreenMixin extends Screen {
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     private void init(CallbackInfo ci) {
         OptionsScreen self = (OptionsScreen) ((Object) this);
+        assert self.client != null;
         DirectionalLayoutWidget directionalLayoutWidget = self.layout.addHeader(DirectionalLayoutWidget.vertical().spacing(8));
         directionalLayoutWidget.add(new TextWidget(TITLE_TEXT, self.textRenderer), Positioner::alignHorizontalCenter);
         DirectionalLayoutWidget directionalLayoutWidget2 = directionalLayoutWidget.add(DirectionalLayoutWidget.horizontal()).spacing(8);
@@ -72,11 +76,10 @@ public abstract class OptionsScreenMixin extends Screen {
         adder.add(this.createButton(VES_TEXT, () -> new VESSettingsScreen(self)));
         adder.add(this.createButton(CREDITS_AND_ATTRIBUTION_TEXT, () -> new CreditsAndAttributionScreen(self)));
         self.layout.addBody(gridWidget);
-        self.layout.addFooter(ButtonWidget.builder(ScreenTexts.DONE, (button) -> {
-            self.close();
-        }).width(200).build());
+        self.layout.addFooter(ButtonWidget.builder(ScreenTexts.DONE, this::close).width(200).build());
         self.layout.forEachChild(self::addDrawableChild);
         self.initTabNavigation();
         ci.cancel();
     }
+    @Unique private void close(Object...args) { this.close(); }
 }
