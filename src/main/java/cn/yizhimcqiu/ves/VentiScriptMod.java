@@ -1,6 +1,5 @@
 package cn.yizhimcqiu.ves;
 
-import cn.yizhimcqiu.ves.ci.CustomBlockManager;
 import cn.yizhimcqiu.ves.ci.CustomItemManager;
 import cn.yizhimcqiu.ves.commands.ExecuteScriptCommand;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
@@ -28,7 +27,6 @@ public class VentiScriptMod implements ModInitializer {
         VESDataComponentTypes.initialize();
 
         CustomItemManager.initialize();
-        CustomBlockManager.initialize();
 
         ServerLifecycleEvents.SERVER_STARTED.register((server -> ModPersistentStates.instance = ModPersistentStates.getServerState(server)));
     }

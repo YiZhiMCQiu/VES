@@ -19,8 +19,13 @@
   },
   "mixins": [
     "ves.mixins.json",
+    "vine.mixins.json",
     {
       "config": "ves.client.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "vine.client.mixins.json",
       "environment": "client"
     }
   ],
