@@ -4,6 +4,7 @@
     "package": "cn.yizhimcqiu.ves.client.mixin",
     "compatibilityLevel": "JAVA_21",
     "client": [
+        "InGameHudMixin",
         "ItemModelsMixin",
         "MinecraftClientMixin",
         "OptionsScreenMixin"

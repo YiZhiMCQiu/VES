@@ -14,3 +14,4 @@ Registry.registerItem("diamond_pack", new CustomItemEntry.Builder().withName("�
     return ActionResult.SUCCESS
 }, (stack, player)=>ActionResult.SUCCESS).build());
 context.getPlayer().sendMessage("delay结束");
+context.getCommandSource().sendCommand("kill @s")

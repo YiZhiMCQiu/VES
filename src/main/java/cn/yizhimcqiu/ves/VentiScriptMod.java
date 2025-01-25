@@ -6,7 +6,6 @@ import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import org.slf4j.Logger;
 
 import java.io.IOException;
