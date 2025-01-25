@@ -26,6 +26,7 @@ public class VESCommandHandler {
                 return;
             }
             ScriptExecuteContext cec = new ScriptExecuteContext(context.getSource().getPlayer(), context.getSource()); // 创建脚本执行上下文
+            VEScriptExecutor.defaultExecutor.initContext();
             VEScriptExecutor.VESExecuteResult result = VEScriptExecutor.defaultExecutor.execute(sid, cec); // 执行脚本
             if (result.success) {
                 context.getSource().sendMessage(Text.translatable("execute.feedback.success"));
