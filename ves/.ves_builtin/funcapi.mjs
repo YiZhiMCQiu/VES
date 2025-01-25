@@ -1,4 +1,4 @@
-// export const CommandExecuteContext = Java.type("cn.yizhimcqiu.ves.CommandExecuteContext");
+// export const CommandExecuteContext = Java.type("cn.yizhimcqiu.ves.ScriptExecuteContext");
 export const Items = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptItems")
 export const Blocks = Java.type("cn.yizhimcqiu.ves.scriptSupport.world.block.ScriptBlocks")
 // export const Entity = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptEntity")

@@ -9,4 +9,3 @@ Version: 0.1.0
 - 自定义物品(名称、描述、右键操作和贴图)<br><br>
 
 ***
-<small>Powered by GraalVM</small>

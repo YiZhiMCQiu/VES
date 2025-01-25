@@ -1,6 +1,6 @@
 package cn.yizhimcqiu.ves.client.core;
 
-import cn.yizhimcqiu.ves.CommandExecuteContext;
+import cn.yizhimcqiu.ves.ScriptExecuteContext;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import cn.yizhimcqiu.vine.Vine;
 import cn.yizhimcqiu.vine.VineExecuteExceptionHandler;
@@ -26,9 +26,9 @@ public class VESClientCommandHandler {
                         Text.of(Vine.PREFIX+"缺失以下依赖项: "+(String.join(", ", md))));
                 return;
             }
-            CommandExecuteContext cec = null;
-            VEScriptExecutor.defaultLoader.initContext();
-            VEScriptExecutor.VESExecuteResult result = VEScriptExecutor.defaultLoader.execute(sid.split("::")[0], sid.split("::")[1], cec);
+            ScriptExecuteContext cec = null;
+            VEScriptExecutor.defaultExecutor.initContext();
+            VEScriptExecutor.VESExecuteResult result = VEScriptExecutor.defaultExecutor.execute(sid.split("::")[0], sid.split("::")[1], cec);
             if (result.success) {
                 context.getSource().sendFeedback(Text.translatable("execute.feedback.success"));
             } else {

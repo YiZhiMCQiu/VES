@@ -1,6 +1,6 @@
 package cn.yizhimcqiu.ves.core;
 
-import cn.yizhimcqiu.ves.CommandExecuteContext;
+import cn.yizhimcqiu.ves.ScriptExecuteContext;
 import cn.yizhimcqiu.vine.Vine;
 import cn.yizhimcqiu.vine.VineExecuteExceptionHandler;
 import cn.yizhimcqiu.vine.dependency.VineDependencyResolver;
@@ -19,23 +19,22 @@ public class VESCommandHandler {
         String sid = StringArgumentType.getString(context, "sid");
         context.getSource().sendMessage(Text.translatable("execute.feedback.start", sid));
         new Thread(() -> {
-            List<String> md;
+            List<String> md; // 缺失的依赖项列表
             if ((md = VineDependencyResolver.getMissingDependencies(sid)) != null) {
                 context.getSource().sendMessage(
                         Text.of(Vine.PREFIX+"缺失以下依赖项: "+(String.join(", ", md))));
                 return;
             }
-            CommandExecuteContext cec = new CommandExecuteContext(context.getSource().getPlayer(), context.getSource());
-            VEScriptExecutor.defaultLoader.initContext();
-            VEScriptExecutor.VESExecuteResult result = VEScriptExecutor.defaultLoader.execute(sid.split("::")[0], sid.split("::")[1], cec);
+            ScriptExecuteContext cec = new ScriptExecuteContext(context.getSource().getPlayer(), context.getSource()); // 创建脚本执行上下文
+            VEScriptExecutor.VESExecuteResult result = VEScriptExecutor.defaultExecutor.execute(sid, cec); // 执行脚本
             if (result.success) {
                 context.getSource().sendMessage(Text.translatable("execute.feedback.success"));
             } else {
                 context.getSource().sendError(Text.translatable("execute.feedback.fail"));
-                MutableText errorMessage = VineExecuteExceptionHandler.createErrorMessage(result.throwable);
-                HoverEvent hoverEvent = createErrorHoverEvent(result.message);
-                errorMessage = errorMessage.styled(style -> style.withHoverEvent(hoverEvent));
-                context.getSource().sendMessage(errorMessage);
+                MutableText errorMessage = VineExecuteExceptionHandler.createErrorMessage(result.throwable); // 扔给Vine并获取错误信息
+                HoverEvent hoverEvent = createErrorHoverEvent(result.message); // 创建用于显示完整错误信息的悬停事件
+                errorMessage = errorMessage.styled(style -> style.withHoverEvent(hoverEvent)); // 添加悬停事件
+                context.getSource().sendMessage(errorMessage); // 发送错误信息
             }
         }).start();
     }

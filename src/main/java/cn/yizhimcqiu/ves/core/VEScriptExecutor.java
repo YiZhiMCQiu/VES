@@ -1,6 +1,6 @@
 package cn.yizhimcqiu.ves.core;
 
-import cn.yizhimcqiu.ves.CommandExecuteContext;
+import cn.yizhimcqiu.ves.ScriptExecuteContext;
 import cn.yizhimcqiu.ves.VESManifest;
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import com.google.gson.Gson;
@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class VEScriptExecutor {
-    public static VEScriptExecutor defaultLoader = new VEScriptExecutor();
+    public static VEScriptExecutor defaultExecutor = new VEScriptExecutor();
     public static final List<String> SCRIPT_IDENTIFIERS = new ArrayList<>();
     private Context context;
     public VEScriptExecutor() {
@@ -29,10 +29,13 @@ public class VEScriptExecutor {
                 .currentWorkingDirectory(Path.of("ves").toAbsolutePath())
                 .build();
     }
-    public VESExecuteResult execute(String namespace, String name, CommandExecuteContext executeContext) {
+    public VESExecuteResult execute(String sid, ScriptExecuteContext executeContext) {
+        return this.execute(Path.of("ves", sid.split("::")[0], sid.split("::")[1]+".mjs").toAbsolutePath(), executeContext);
+    }
+    public VESExecuteResult execute(String namespace, String name, ScriptExecuteContext executeContext) {
         return this.execute(Path.of("ves", namespace, name+".mjs").toAbsolutePath(), executeContext);
     }
-    public VESExecuteResult execute(Path path, CommandExecuteContext executeContext) {
+    public VESExecuteResult execute(Path path, ScriptExecuteContext executeContext) {
         if (this.isInvalidScriptName(path)) {
             return new VESExecuteResult(false, "Invalid script name", null);
         }
@@ -46,13 +49,12 @@ public class VEScriptExecutor {
     protected boolean isInvalidScriptName(Path path) {
         return path.getFileName().startsWith(".");
     }
-    private VESExecuteResult execute(Source source, CommandExecuteContext context) {
-        this.context.getBindings("js").putMember("_context", context);
-        this.context.getBindings("js").putMember("IS_DEVELOP", VentiScriptMod.isDevelop);
-        this.context.getBindings("js").putMember("builtin", "(name)=>\"../.ves/builtin/\"+name+\".mjs\"");
+    private VESExecuteResult execute(Source source, ScriptExecuteContext context) {
+        this.context.getBindings("js").putMember("_context", context); // 声明Java的context
+        this.context.getBindings("js").putMember("IS_DEVELOP", VentiScriptMod.isDevelop); // 声明环境类型
         String res = this.context.eval(source).toString();
         if (res.contains("[[PromiseStatus]]: \"rejected\"")) {
-            throw new RuntimeException("Promise is rejected: "+res);
+            throw new RuntimeException("Promise is rejected: "+res); // 直接扔给Vine处理
         }
         return VESExecuteResult.success(res);
     }

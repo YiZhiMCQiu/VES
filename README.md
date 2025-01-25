@@ -1,5 +1,6 @@
 # Venti Script
 ## Allows you write Minecraft commands in JavaScript
+Version: 0.1.0<br>
 
 [zh_CN](/README_zh-CN.md)
 
@@ -10,4 +11,3 @@ Example:
 - Customize items (name, description, right-click action, and texture)<br><br>
 
 ***
-<small>Powered by GraalVM</small>
