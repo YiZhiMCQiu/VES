@@ -22,12 +22,12 @@ public class VESCommandHandler {
             List<String> md; // 缺失的依赖项列表
             if ((md = VineDependencyResolver.getMissingDependencies(sid)) != null) {
                 context.getSource().sendMessage(
-                        Text.of(Vine.PREFIX+"缺失以下依赖项: "+(String.join(", ", md))));
+                        Text.of(Vine.PREFIX+"缺失以下依赖项: "+String.join(", ", md)));
                 return;
             }
-            ScriptExecuteContext cec = new ScriptExecuteContext(context.getSource().getPlayer(), context.getSource()); // 创建脚本执行上下文
+            ScriptExecuteContext ctx = new ScriptExecuteContext(context.getSource().getPlayer(), context.getSource()); // 创建脚本执行上下文
             VEScriptExecutor.defaultExecutor.initContext();
-            VEScriptExecutor.VESExecuteResult result = VEScriptExecutor.defaultExecutor.execute(sid, cec); // 执行脚本
+            VEScriptExecutor.VESExecuteResult result = VEScriptExecutor.defaultExecutor.execute(sid, ctx); // 执行脚本
             if (result.success) {
                 context.getSource().sendMessage(Text.translatable("execute.feedback.success"));
             } else {

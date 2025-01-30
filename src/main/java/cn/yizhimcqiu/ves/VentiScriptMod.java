@@ -2,6 +2,7 @@ package cn.yizhimcqiu.ves;
 
 import cn.yizhimcqiu.ves.ci.CustomItemManager;
 import cn.yizhimcqiu.ves.commands.ExecuteScriptCommand;
+import cn.yizhimcqiu.ves.commands.VESCommand;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
 import com.mojang.logging.LogUtils;
@@ -39,6 +40,7 @@ public class VentiScriptMod implements ModInitializer {
 
     private void registerCommands() {
         new ExecuteScriptCommand().register();
+        new VESCommand().register();
     }
     public static void updateVES() {
         try {
