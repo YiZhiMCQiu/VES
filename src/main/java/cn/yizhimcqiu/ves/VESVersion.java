@@ -4,8 +4,6 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
-import java.net.URI;
-
 public interface VESVersion {
     String VERSION = "0.1.0";
     Text VERSION_TEXT = ((MutableText) Text.of("Venti Script Mod"))

@@ -1,7 +1,7 @@
 package cn.yizhimcqiu.ves.client;
 
 import cn.yizhimcqiu.ves.client.commands.VESSettingsCommand;
-import cn.yizhimcqiu.ves.network.SendCommandS2CPayload;
+import cn.yizhimcqiu.ves.network.SendCommandS2CPacket;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -16,7 +16,7 @@ public class VentiScriptModClient implements ClientModInitializer {
     public void onInitializeClient() {
         VESSettingsCommand.register();
 
-        PayloadTypeRegistry.playS2C().register(SendCommandS2CPayload.ID, SendCommandS2CPayload.CODEC);
-        ClientPlayNetworking.registerGlobalReceiver(SendCommandS2CPayload.ID, (payload, context) -> Objects.requireNonNull(context.client().getNetworkHandler()).sendChatCommand(payload.command()));
+        PayloadTypeRegistry.playS2C().register(SendCommandS2CPacket.ID, SendCommandS2CPacket.CODEC);
+        ClientPlayNetworking.registerGlobalReceiver(SendCommandS2CPacket.ID, (payload, context) -> Objects.requireNonNull(context.client().getNetworkHandler()).sendChatCommand(payload.command()));
     }
 }

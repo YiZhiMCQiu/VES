@@ -2,7 +2,7 @@ package cn.yizhimcqiu.ves.ci.items;
 
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import cn.yizhimcqiu.ves.ci.CustomItemManager;
-import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
+import cn.yizhimcqiu.ves.ci.items.components.VESNbtTags;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptItemStack;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptServerPlayerEntity;
 import net.minecraft.client.item.TooltipContext;
@@ -52,15 +52,18 @@ public class CustomItem extends Item {
         return Registry.register(Registries.ITEM, Identifier.of(VentiScriptMod.MOD_ID, "custom_item"), new CustomItem(new Item.Settings()));
     }
     public static CustomItemManager.CustomItemEntry getCustomItemEntry(ItemStack stack) {
-        return CustomItemManager.getEntry(stack.getOrDefault(VESDataComponentTypes.CUSTOM_ITEM_TYPE, "missing"));
+        return CustomItemManager.getEntry(orDefault(stack.getOrCreateNbt().getString(VESNbtTags.CUSTOM_ITEM)));
+    }
+    private static String orDefault(String s) {
+        return s == null ? "missing" : s;
     }
     public static ItemStack createCustomItem(String id) {
         ItemStack stack = new ItemStack(CustomItemManager.CUSTOM_ITEM);
-        stack.set(VESDataComponentTypes.CUSTOM_ITEM_TYPE, id);
+        stack.getOrCreateNbt().putString(VESNbtTags.CUSTOM_ITEM, id);
         return stack;
     }
     public static void makeCustom(ScriptItemStack stack, String id) {
-        stack.$_getItemStack().set(VESDataComponentTypes.CUSTOM_ITEM_TYPE, id);
+        stack.$_getItemStack().getOrCreateNbt().putString(VESNbtTags.CUSTOM_ITEM, id);
     }
 
     @Override
