@@ -1,8 +1,8 @@
 // export const CommandExecuteContext = Java.type("cn.yizhimcqiu.ves.ScriptExecuteContext");
-export const Items = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptItems")
-export const Blocks = Java.type("cn.yizhimcqiu.ves.scriptSupport.world.block.ScriptBlocks")
+export const Items = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptItemType")
+export const Blocks = Java.type("cn.yizhimcqiu.ves.scriptSupport.world.block.ScriptBlockType")
 // export const Entity = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptEntity")
-export const EntityTypes = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptEntities")
+export const EntityTypes = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptEntityType")
 export const NbtCompound = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptNBTCompound")
 export const Color = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptChatColor")
 export const Registry = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptRegistry")

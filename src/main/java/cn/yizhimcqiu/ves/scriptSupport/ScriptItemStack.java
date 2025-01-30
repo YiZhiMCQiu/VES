@@ -6,10 +6,10 @@ import net.minecraft.item.ItemStack;
 
 @SuppressWarnings("unused")
 public class ScriptItemStack {
-    private ScriptItems item;
+    private ScriptItemType item;
     private int count;
     private final ItemStack stack;
-    public ScriptItemStack(ScriptItems item, int count) {
+    public ScriptItemStack(ScriptItemType item, int count) {
         this.stack = new ItemStack(item.$_getItem(), count);
     }
     public ScriptItemStack(ItemStack stack) {
@@ -18,7 +18,7 @@ public class ScriptItemStack {
     public int getCount() {
         return this.stack.getCount();
     }
-    public ScriptItems getItem() {
+    public ScriptItemType getItem() {
         return item;
     }
     public void setCount(int count) {

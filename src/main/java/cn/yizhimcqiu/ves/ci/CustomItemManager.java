@@ -2,6 +2,7 @@ package cn.yizhimcqiu.ves.ci;
 
 import cn.yizhimcqiu.ves.ci.items.CustomItem;
 import cn.yizhimcqiu.ves.scriptSupport.*;
+import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,13 +17,13 @@ public class CustomItemManager {
     public static CustomItemEntry getEntry(String id) {
         return registeredItems.getOrDefault(id, new CustomItemEntry.Builder().build());
     }
-    public record CustomItemEntry(String name, String description, UseProtocol onServerUse, ClientUseProtocol onClientUse, ScriptItems texture) {
+    public record CustomItemEntry(String name, String description, UseProtocol onServerUse, ClientUseProtocol onClientUse, ScriptItemType texture) {
         public static class Builder {
             private String name = "undefined";
             private String description = "";
             private UseProtocol onServerUse = UseProtocol.EMPTY;
             private ClientUseProtocol onClientUse = ClientUseProtocol.EMPTY;
-            private ScriptItems texture = ScriptItems.GLOW_INK_SAC;
+            private ScriptItemType texture = new ScriptItemType(Identifier.ofVanilla("glow_ink_sac"));
 
             public Builder withName(String name) {
                 this.name = name;
@@ -40,7 +41,7 @@ public class CustomItemManager {
                 return this;
             }
 
-            public Builder withTexture(ScriptItems item) {
+            public Builder withTexture(ScriptItemType item) {
                 this.texture = item;
                 return this;
             }

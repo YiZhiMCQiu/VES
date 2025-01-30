@@ -3,8 +3,6 @@ package cn.yizhimcqiu.ves.ci.items;
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import cn.yizhimcqiu.ves.ci.CustomItemManager;
 import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
-import cn.yizhimcqiu.ves.scriptSupport.ScriptEntities;
-import cn.yizhimcqiu.ves.scriptSupport.ScriptEntity;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptItemStack;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptServerPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -70,7 +68,7 @@ public class CustomItem extends Item {
         if (!world.isClient() && user instanceof ServerPlayerEntity sp) {
             return getCustomItemEntry(stack).onServerUse().onUse(new ScriptItemStack(stack), new ScriptServerPlayerEntity(sp)).createActionResult(stack);
         } else {
-            return getCustomItemEntry(stack).onClientUse().onUse(new ScriptItemStack(stack), new ScriptEntity(user, ScriptEntities.ITEM)).createActionResult(stack);
+            return getCustomItemEntry(stack).onClientUse().onUse(new ScriptItemStack(stack), null).createActionResult(stack);
         }
     }
 }

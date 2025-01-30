@@ -1,6 +1,6 @@
 package cn.yizhimcqiu.ves.scriptSupport.world;
 
-import cn.yizhimcqiu.ves.scriptSupport.world.block.ScriptBlocks;
+import cn.yizhimcqiu.ves.scriptSupport.world.block.ScriptBlockType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,14 +19,14 @@ public class ScriptWorld {
     public boolean isEnd() {
         return world.getRegistryKey() == World.END;
     }
-    public void setBlock(int x, int y, int z, ScriptBlocks block) {
+    public void setBlock(int x, int y, int z, ScriptBlockType block) {
         this.world.setBlockState(new BlockPos(x, y, z), block.$_getBlock().getDefaultState());
     }
-    public void setBlock(double x, double y, double z, ScriptBlocks block) {
+    public void setBlock(double x, double y, double z, ScriptBlockType block) {
         this.setBlock((int) Math.round(x),(int) Math.round(y), (int) Math.round(z), block);
     }
-    public ScriptBlocks getBlockAt(int x, int y, int z) {
-        return ScriptBlocks.getBlock(this.world.getBlockState(new BlockPos(x, y, z)).getBlock());
+    public ScriptBlockType getBlockAt(int x, int y, int z) {
+        return ScriptBlockType.getBlock(this.world.getBlockState(new BlockPos(x, y, z)).getBlock());
     }
     public ServerWorld $_getWorld() {
         return this.world;

@@ -10,14 +10,14 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("unused")
 public class ScriptEntity {
-    protected final ScriptEntities type;
+    protected final ScriptEntityType type;
     protected Entity entity = null;
     protected World world;
-    public ScriptEntity(ScriptEntities type, ScriptWorld world) {
+    public ScriptEntity(ScriptEntityType type, ScriptWorld world) {
         this.type = type;
         this.world = world.$_getWorld();
     }
-    public ScriptEntity(Entity entity, ScriptEntities type) {
+    public ScriptEntity(Entity entity, ScriptEntityType type) {
         this.entity = entity;
         this.type = type;
         this.world = entity.getWorld();

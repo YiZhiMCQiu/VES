@@ -45,7 +45,7 @@ public class ScriptServerPlayerEntity extends ScriptEntity {
     public void setGameMode(String gameMode) {
         ((ServerPlayerEntity)entity).changeGameMode(GameMode.byName(gameMode));
     }
-    public void giveItem(ScriptItems item, int count) {
+    public void giveItem(ScriptItemType item, int count) {
         ((ServerPlayerEntity)entity).giveItemStack(new ItemStack(item.$_getItem(), count));
     }
     public void giveItem(ScriptItemStack stack) {
