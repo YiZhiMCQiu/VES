@@ -15,8 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(OptionsScreen.class)
 public abstract class OptionsScreenMixin {
     @Unique
-    private static final Text TITLE_TEXT = Text.translatable("options.title");
-    @Unique
     private static final Text SKIN_CUSTOMIZATION_TEXT = Text.translatable("options.skinCustomisation");
     @Unique
     private static final Text SOUNDS_TEXT = Text.translatable("options.sounds");
@@ -27,15 +25,15 @@ public abstract class OptionsScreenMixin {
     @Unique
     private static final Text LANGUAGE_TEXT = Text.translatable("options.language");
     @Unique
-    private static final Text CHAT_TEXT = Text.translatable("options.chat");
+    private static final Text CHAT_TEXT = Text.translatable("options.chat.title");
     @Unique
     private static final Text RESOURCE_PACK_TEXT = Text.translatable("options.resourcepack");
     @Unique
-    private static final Text ACCESSIBILITY_TEXT = Text.translatable("options.accessibility");
-    @Unique
-    private static final Text VES_TEXT = Text.translatable("options.ves");
+    private static final Text ACCESSIBILITY_TEXT = Text.translatable("options.accessibility.title");
     @Unique
     private static final Text CREDITS_AND_ATTRIBUTION_TEXT = Text.translatable("options.credits_and_attribution");
+    @Unique
+    private static final Text VES_TEXT = Text.translatable("options.ves");
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     private void init(CallbackInfo ci) {
