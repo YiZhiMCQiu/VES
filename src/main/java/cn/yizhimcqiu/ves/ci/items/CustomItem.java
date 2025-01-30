@@ -5,10 +5,10 @@ import cn.yizhimcqiu.ves.ci.CustomItemManager;
 import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptItemStack;
 import cn.yizhimcqiu.ves.scriptSupport.ScriptServerPlayerEntity;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -17,6 +17,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class CustomItem extends Item {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         String desc = getCustomItemEntry(stack).description();
         if (!desc.isEmpty()) {
             tooltip.add(Text.literal(desc));

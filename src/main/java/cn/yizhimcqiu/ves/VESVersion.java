@@ -11,7 +11,7 @@ public interface VESVersion {
     Text VERSION_TEXT = ((MutableText) Text.of("Venti Script Mod"))
             .append("版本: "+VERSION).append("\n")
             .append("GitHub开源地址: ")
-            .append(((MutableText) Text.of(URI.create("https://github.com/YiZhiMCQiu/VES"))).styled(
+            .append(((MutableText) Text.of("https://github.com/YiZhiMCQiu/VES")).styled(
                     style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/YiZhiMCQiu/VES"))
             ));
 }

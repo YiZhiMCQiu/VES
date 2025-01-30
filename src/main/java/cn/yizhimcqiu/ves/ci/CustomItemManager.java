@@ -23,7 +23,7 @@ public class CustomItemManager {
             private String description = "";
             private UseProtocol onServerUse = UseProtocol.EMPTY;
             private ClientUseProtocol onClientUse = ClientUseProtocol.EMPTY;
-            private ScriptItemType texture = new ScriptItemType(Identifier.ofVanilla("glow_ink_sac"));
+            private ScriptItemType texture = new ScriptItemType(Identifier.of("minecraft", "glow_ink_sac"));
 
             public Builder withName(String name) {
                 this.name = name;
