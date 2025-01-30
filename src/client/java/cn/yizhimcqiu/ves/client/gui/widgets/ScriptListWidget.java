@@ -12,9 +12,10 @@ import java.util.List;
  */
 public class ScriptListWidget extends AlwaysSelectedEntryListWidget<ScriptListEntry> {
     private ScriptListEntry selected = null;
-    public ScriptListWidget(MinecraftClient minecraftClient, int i, int j, int k, int l) {
-        super(minecraftClient, i, j, k, l);
+    public ScriptListWidget(MinecraftClient minecraftClient, int i, int j, int k, int l, int m) {
+        super(minecraftClient, i, j, k, l, m);
     }
+
     public void select(ScriptListEntry entry) {
         this.selected = entry;
     }

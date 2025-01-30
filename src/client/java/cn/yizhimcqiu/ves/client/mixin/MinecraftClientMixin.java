@@ -2,7 +2,6 @@ package cn.yizhimcqiu.ves.client.mixin;
 
 import cn.yizhimcqiu.ves.client.event.ClientPlayerJoinWorldCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.ModStatus;
@@ -24,7 +23,7 @@ public class MinecraftClientMixin {
         cir.setReturnValue(new ModStatus(ModStatus.Confidence.DEFINITELY, "Client brand changed to 'vanilla'"));
     }
     @Inject(at = @At("TAIL"), method = "joinWorld")
-    private void joinWorld(ClientWorld world, DownloadingTerrainScreen.WorldEntryReason worldEntryReason, CallbackInfo ci) {
+    private void joinWorld(ClientWorld world, CallbackInfo ci) {
         ClientPlayerJoinWorldCallback.EVENT.invoker().onPlayerJoinWorld(this.player, this.world, (MinecraftClient) (Object) this);
     }
 }

@@ -21,7 +21,7 @@ import java.nio.file.Path;
  * 疑似抄袭ModMenu哈🙄💅
  */
 public class ScriptListEntry extends AlwaysSelectedEntryListWidget.Entry<ScriptListEntry> {
-    public static final Identifier UNKNOWN_ICON = Identifier.ofVanilla("textures/misc/unknown_pack.png");
+    public static final Identifier UNKNOWN_ICON = Identifier.of("minecraft", "textures/misc/unknown_pack.png");
     private Identifier iconIdentifier;
     private final VESManifest manifest;
     private final ScriptListWidget list;

@@ -43,7 +43,7 @@ public class VESSettingsScreen extends Screen {
     }
     @Override
     protected void init() {
-        this.scriptList = new ScriptListWidget(this.client, this.width - 20, this.height - 40, 20, 32);
+        this.scriptList = new ScriptListWidget(this.client, this.width - 20, this.height - 40, 20, 32, 0);
         this.scriptList.init(this.scripts);
         ButtonWidget updateButton =  this.addDrawableChild(ButtonWidget.builder(Text.of("更新"),
                 button -> VentiScriptMod.updateVES()).build());
@@ -67,7 +67,7 @@ public class VESSettingsScreen extends Screen {
         }
     }
     private void renderIcon(DrawContext context) {
-        this.drawTexture(context, 0, ButtonWidget.field_46856, ICON_SIZE, ICON_SIZE, ICON_IDENTIFIER, 0.2f);
+        this.drawTexture(context, 0, ButtonWidget.DEFAULT_HEIGHT, ICON_SIZE, ICON_SIZE, ICON_IDENTIFIER, 0.2f);
     }
     private void drawTexture(DrawContext context, int x, int y, int w, int h, Identifier texture) {
         this.drawTexture(context, x, y, w, h, texture, 1);
