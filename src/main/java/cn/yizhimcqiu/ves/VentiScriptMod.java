@@ -6,6 +6,7 @@ import cn.yizhimcqiu.ves.commands.VESCommand;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
 import cn.yizhimcqiu.vine.installer.VineBuiltinInstaller;
+import cn.yizhimcqiu.vine.installer.VineLibInstaller;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ public class VentiScriptMod implements ModInitializer {
         this.registerCommands();
         this.updateEnvironment();
 
-        checkVESFolder();
+        before();
         VEScriptExecutor.initialize();
         VESDataComponentTypes.initialize();
         CustomItemManager.initialize();
@@ -68,6 +69,10 @@ public class VentiScriptMod implements ModInitializer {
             }
         });
     }
+    private void before() {
+        checkVESFolder();
+        checkLibVES();
+    }
     private void checkVESFolder() {
         Path path = Path.of("ves");
         try {
@@ -77,6 +82,11 @@ public class VentiScriptMod implements ModInitializer {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    private void checkLibVES() {
+        if (!Files.exists(Path.of("mods", "libVES.jar")) && !isDevelop) {
+            VineLibInstaller.install();
         }
     }
 }
