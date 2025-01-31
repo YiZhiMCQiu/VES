@@ -4,6 +4,7 @@ import cn.yizhimcqiu.ves.ci.CustomItemManager;
 import cn.yizhimcqiu.ves.commands.ExecuteScriptCommand;
 import cn.yizhimcqiu.ves.commands.VESCommand;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
+import cn.yizhimcqiu.vine.installer.VineBuiltinInstaller;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -69,7 +70,7 @@ public class VentiScriptMod implements ModInitializer {
         Path path = Path.of("ves");
         try {
             if (!Files.exists(path)) {
-                Files.createDirectory(path);
+                VineBuiltinInstaller.install();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
