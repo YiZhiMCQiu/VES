@@ -19,7 +19,7 @@ public final class SendCommandS2CPacket implements FabricPacket {
     }
     @Override
     public PacketType<?> getType() {
-        return null;
+        return TYPE;
     }
     public String getCommand() {
         return command;
