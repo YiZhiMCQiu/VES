@@ -5,6 +5,7 @@ import cn.yizhimcqiu.ves.commands.ExecuteScriptCommand;
 import cn.yizhimcqiu.ves.commands.VESCommand;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
+import cn.yizhimcqiu.vine.installer.VineBuiltinInstaller;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -25,7 +26,6 @@ public class VentiScriptMod implements ModInitializer {
         checkVESFolder();
         VEScriptExecutor.initialize();
         VESDataComponentTypes.initialize();
-
         CustomItemManager.initialize();
     }
 
@@ -34,7 +34,7 @@ public class VentiScriptMod implements ModInitializer {
             Class.forName("net.minecraft.entity.mob.CreeperEntity");
             isDevelop = true;
             LOGGER.info("Development environment detected");
-            updateVES();
+            // updateVES();
         } catch (ClassNotFoundException ignored) { }
     }
 
@@ -72,7 +72,8 @@ public class VentiScriptMod implements ModInitializer {
         Path path = Path.of("ves");
         try {
             if (!Files.exists(path)) {
-                Files.createDirectory(path);
+                // Files.createDirectory(path);
+                VineBuiltinInstaller.install();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
