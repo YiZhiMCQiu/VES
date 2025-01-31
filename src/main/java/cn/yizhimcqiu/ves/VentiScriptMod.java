@@ -22,6 +22,7 @@ public class VentiScriptMod implements ModInitializer {
         this.registerCommands();
         this.updateEnvironment();
 
+        checkVESFolder();
         VEScriptExecutor.initialize();
         VESDataComponentTypes.initialize();
 
@@ -30,12 +31,11 @@ public class VentiScriptMod implements ModInitializer {
 
     private void updateEnvironment() {
         try {
-            Class.forName("net.minecraft.class_2561");
-        } catch (ClassNotFoundException e) {
+            Class.forName("net.minecraft.entity.mob.CreeperEntity");
             isDevelop = true;
             LOGGER.info("Development environment detected");
             updateVES();
-        }
+        } catch (ClassNotFoundException ignored) { }
     }
 
     private void registerCommands() {
@@ -67,5 +67,15 @@ public class VentiScriptMod implements ModInitializer {
                 return FileVisitResult.CONTINUE;
             }
         });
+    }
+    private void checkVESFolder() {
+        Path path = Path.of("ves");
+        try {
+            if (Files.exists(path)) {
+                Files.createDirectory(path);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
