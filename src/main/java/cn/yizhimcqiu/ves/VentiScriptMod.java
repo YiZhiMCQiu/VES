@@ -71,7 +71,7 @@ public class VentiScriptMod implements ModInitializer {
     private void checkVESFolder() {
         Path path = Path.of("ves");
         try {
-            if (Files.exists(path)) {
+            if (!Files.exists(path)) {
                 Files.createDirectory(path);
             }
         } catch (IOException e) {
