@@ -2,8 +2,8 @@ package cn.yizhimcqiu.ves.scriptSupport;
 
 import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.entity.EntityType;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.Objects;
 
@@ -20,6 +20,6 @@ public class ScriptEntityType extends ScriptEnum {
     }
     @VESCallIgnore
     public EntityType<?> $_getEntityType() {
-        return Registries.ENTITY_TYPE.get(this.identifier);
+        return Registry.ENTITY_TYPE.get(this.identifier);
     }
 }

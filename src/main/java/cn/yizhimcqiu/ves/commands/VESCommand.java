@@ -16,12 +16,12 @@ public class VESCommand {
                 .then(literal("list")
                         .executes((ctx) -> {
                             List<String> sids = VEScriptExecutor.SCRIPT_IDENTIFIERS;
-                            ctx.getSource().sendFeedback(() -> Text.of("已启用%d个脚本：\n".formatted(sids.size())+ Strings.join(sids, "，")), false);
+                            ctx.getSource().sendFeedback(Text.of("已启用%d个脚本：\n".formatted(sids.size())+ Strings.join(sids, "，")), false);
                             return 1;
                         }))
                 .then(literal("version")
                         .executes((ctx) -> {
-                            ctx.getSource().sendFeedback(() -> VESVersion.VERSION_TEXT, false);
+                            ctx.getSource().sendFeedback(VESVersion.VERSION_TEXT, false);
                             return 1;
                         }))));
     }

@@ -17,25 +17,25 @@ import java.util.List;
 public class VESCommandHandler {
     public static void onCommand(CommandContext<ServerCommandSource> context) {
         String sid = StringArgumentType.getString(context, "sid");
-        context.getSource().sendMessage(Text.translatable("execute.feedback.start", sid));
+        context.getSource().sendFeedback(Text.translatable("execute.feedback.start", sid), false);
         new Thread(() -> {
             List<String> md; // 缺失的依赖项列表
             if ((md = VineDependencyResolver.getMissingDependencies(sid)) != null) {
-                context.getSource().sendMessage(
-                        Text.of(Vine.PREFIX+"缺失以下依赖项: "+String.join(", ", md)));
+                context.getSource().sendFeedback(
+                        Text.of(Vine.PREFIX+"缺失以下依赖项: "+String.join(", ", md)), false);
                 return;
             }
             ScriptExecuteContext ctx = new ScriptExecuteContext(context.getSource().getPlayer(), context.getSource()); // 创建脚本执行上下文
             VEScriptExecutor.defaultExecutor.initContext();
             VEScriptExecutor.VESExecuteResult result = VEScriptExecutor.defaultExecutor.execute(sid, ctx); // 执行脚本
             if (result.success) {
-                context.getSource().sendMessage(Text.translatable("execute.feedback.success"));
+                context.getSource().sendFeedback(Text.translatable("execute.feedback.success"), false);
             } else {
                 context.getSource().sendError(Text.translatable("execute.feedback.fail"));
                 MutableText errorMessage = VineExecuteExceptionHandler.createErrorMessage(result.throwable); // 扔给Vine并获取错误信息
                 HoverEvent hoverEvent = createErrorHoverEvent(result.message); // 创建用于显示完整错误信息的悬停事件
                 errorMessage = errorMessage.styled(style -> style.withHoverEvent(hoverEvent)); // 添加悬停事件
-                context.getSource().sendMessage(errorMessage); // 发送错误信息
+                context.getSource().sendFeedback(errorMessage, false); // 发送错误信息
             }
         }).start();
     }

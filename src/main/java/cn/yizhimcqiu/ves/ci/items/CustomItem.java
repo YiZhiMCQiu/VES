@@ -9,13 +9,12 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,7 +48,7 @@ public class CustomItem extends Item {
     }
 
     public static CustomItem register() {
-        return Registry.register(Registries.ITEM, Identifier.of(VentiScriptMod.MOD_ID, "custom_item"), new CustomItem(new Item.Settings()));
+        return Registry.register(Registry.ITEM, Identifier.of(VentiScriptMod.MOD_ID, "custom_item"), new CustomItem(new Item.Settings()));
     }
     public static CustomItemManager.CustomItemEntry getCustomItemEntry(ItemStack stack) {
         return CustomItemManager.getEntry(orDefault(stack.getOrCreateNbt().getString(VESNbtTags.CUSTOM_ITEM)));

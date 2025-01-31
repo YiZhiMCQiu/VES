@@ -1,14 +1,2 @@
 accessWidener	v1	named
 
-accessible field net/minecraft/client/gui/screen/Screen client Lnet/minecraft/client/MinecraftClient;
-accessible field net/minecraft/client/gui/screen/option/OptionsScreen settings Lnet/minecraft/client/option/GameOptions;
-accessible field net/minecraft/client/gui/screen/Screen textRenderer Lnet/minecraft/client/font/TextRenderer;
-accessible field net/minecraft/registry/SimpleRegistry intrusiveValueToEntry Ljava/util/Map;
-accessible field net/minecraft/client/render/block/BlockModels models Ljava/util/Map;
-accessible field net/minecraft/client/gui/screen/option/OptionsScreen parent Lnet/minecraft/client/gui/screen/Screen;
-
-accessible method net/minecraft/client/gui/screen/option/OptionsScreen refreshResourcePacks (Lnet/minecraft/resource/ResourcePackManager;)V
-accessible method net/minecraft/client/gui/screen/option/OptionsScreen createTopRightButton ()Lnet/minecraft/client/gui/widget/Widget;
-accessible method net/minecraft/client/gui/screen/Screen addDrawableChild (Lnet/minecraft/client/gui/Element;)Lnet/minecraft/client/gui/Element;
-accessible method net/minecraft/registry/SimpleRegistry assertNotFrozen ()V
-accessible method net/minecraft/client/gui/screen/option/OptionsScreen createButton (Lnet/minecraft/text/Text;Ljava/util/function/Supplier;)Lnet/minecraft/client/gui/widget/ButtonWidget;

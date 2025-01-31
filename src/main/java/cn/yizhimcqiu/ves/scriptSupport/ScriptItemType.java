@@ -2,8 +2,8 @@ package cn.yizhimcqiu.ves.scriptSupport;
 
 import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.Objects;
 
@@ -20,6 +20,6 @@ public class ScriptItemType extends ScriptEnum {
     }
     @VESCallIgnore
     public Item $_getItem() {
-        return Registries.ITEM.get(this.identifier);
+        return Registry.ITEM.get(this.identifier);
     }
 }

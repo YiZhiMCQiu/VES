@@ -1,6 +1,7 @@
 package cn.yizhimcqiu.ves.scriptSupport;
 
 import cn.yizhimcqiu.ves.scriptSupport.world.ScriptWorld;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -40,7 +41,7 @@ public class ScriptServerPlayerEntity extends ScriptEntity {
         return true;
     }
     public void damage(float amount) {
-        entity.damage(entity.getDamageSources().genericKill(), amount);
+        entity.damage(DamageSource.GENERIC, amount);
     }
     public void setGameMode(String gameMode) {
         ((ServerPlayerEntity)entity).changeGameMode(GameMode.byName(gameMode));

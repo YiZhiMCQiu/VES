@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -24,7 +25,7 @@ public class ScriptEntity {
     }
     public boolean spawn(int x, int y, int z) {
         if (this.entity == null && this.world instanceof ServerWorld serverWorld) {
-            this.entity = this.type.$_getEntityType().spawn(serverWorld, new BlockPos(x, y, z), SpawnReason.COMMAND);
+            this.entity = this.type.$_getEntityType().spawn(serverWorld, new NbtCompound(), Text.empty(), null, new BlockPos(x, y, z), SpawnReason.COMMAND, true, false);
             return true;
         } else {
             return false;
