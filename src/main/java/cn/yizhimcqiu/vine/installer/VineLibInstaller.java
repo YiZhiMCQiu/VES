@@ -11,6 +11,7 @@ import java.net.URL;
 public class VineLibInstaller {
     private static final String GITEE_REPOSITORY_RESOURCE = "https://gitee.com/yizhimcqiu/ves-resources/raw/master/libVES.jar";
     private static final String SAVE_PATH = "mods/libVES.jar";
+    @SuppressWarnings("deprecation")
     public static void install() {
         try {
             URL url = new URL(GITEE_REPOSITORY_RESOURCE);
