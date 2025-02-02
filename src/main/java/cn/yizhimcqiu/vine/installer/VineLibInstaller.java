@@ -23,7 +23,7 @@ public class VineLibInstaller {
                     outputStream.write(buffer, 0, bytesRead);
                 }
             }
-            throw new CrashException(new CrashReport("libVES.jar已下载完成，您可立即重启游戏。", null));
+            // throw new CrashException(new CrashReport("libVES.jar已下载完成，您可立即重启游戏。", null));
         } catch (IOException e) {
             throw new CrashException(new CrashReport("Error while installing libVES.jar!", e));
         }
