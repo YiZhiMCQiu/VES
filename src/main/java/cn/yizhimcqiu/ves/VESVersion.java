@@ -8,6 +8,7 @@ import java.net.URI;
 
 public interface VESVersion {
     String VERSION = "0.1.0";
+    String BUILD_TIME = "202502021720";
     Text VERSION_TEXT = ((MutableText) Text.of("Venti Script Mod"))
             .append("版本: "+VERSION).append("\n")
             .append("GitHub开源地址: ")

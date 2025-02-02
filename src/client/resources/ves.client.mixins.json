@@ -7,7 +7,8 @@
         "InGameHudMixin",
         "ItemModelsMixin",
         "MinecraftClientMixin",
-        "OptionsScreenMixin"
+        "OptionsScreenMixin",
+        "TitleScreenMixin"
     ],
     "injectors": {
         "defaultRequire": 1

@@ -12,13 +12,21 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Properties;
 
 public class VentiScriptMod implements ModInitializer {
     public static final String MOD_ID = "ves";
     public static final Logger LOGGER = LogUtils.getLogger();
+    private static final String VERSION_URL = "https://gitee.com/yizhimcqiu/ves-resources/raw/master/version.properties";
     public static boolean isDevelop = false;
+    private static Properties latestVersion;
+    private static long lastUpdateLatestVersion = 0;
     @Override
     public void onInitialize() {
         this.registerCommands();
@@ -72,6 +80,12 @@ public class VentiScriptMod implements ModInitializer {
     private void before() {
         checkVESFolder();
         checkLibVES();
+        if (getLatestVersion() != null) {
+            if (Long.parseLong(latestVersion.getProperty("build_time"))
+                    > Long.parseLong(VESVersion.BUILD_TIME)) {
+                LOGGER.warn("VES has update available: {}", latestVersion.getProperty("build_time"));
+            }
+        }
     }
     private void checkVESFolder() {
         Path path = Path.of("ves");
@@ -88,5 +102,27 @@ public class VentiScriptMod implements ModInitializer {
         if (!Files.exists(Path.of("mods", "libVES.jar")) && !isDevelop) {
             VineLibInstaller.install();
         }
+    }
+
+    /**
+     * 获取Gitee上version.properties中的内容并加载为Properties
+     * @return 一个Properties，若无更新或发生错误则返回null
+     */
+    @SuppressWarnings("unused")
+    public static Properties getLatestVersion() {
+        if (latestVersion == null || lastUpdateLatestVersion - System.currentTimeMillis() > 30000) {
+            lastUpdateLatestVersion = System.currentTimeMillis();
+            try (InputStream stream = new URL(VERSION_URL).openStream();
+                 InputStreamReader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
+                Properties props = new Properties();
+                props.load(reader);
+                latestVersion = props;
+                return props;
+            } catch (IOException e) {
+                LOGGER.error("Error while loading version!", e);
+            }
+            return null;
+        }
+        return latestVersion;
     }
 }
