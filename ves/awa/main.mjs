@@ -15,5 +15,4 @@ Registry.registerItem("diamond_pack", new CustomItemEntry.Builder().withName("�
     return ActionResult.SUCCESS
 }, (stack, player)=>ActionResult.SUCCESS).build());
 context.getPlayer().sendMessage("delay结束");
-type("net/minecraft/block/Block");
-context.getCommandSource().sendCommand("kill @s");
+type("net.minecraft.block.Block");
