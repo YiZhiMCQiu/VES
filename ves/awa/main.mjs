@@ -1,5 +1,6 @@
 import { Color, CommandExecuteContext, Registry, CustomItemEntry, Items, ActionResult, delay } from ".ves_builtin/funcapi.mjs";
 import { getContext } from ".ves_builtin/init.mjs";
+import { type } from ".ves_builtin/vine-extras.mjs";
 
 var options = [];
 if (IS_DEVELOP) {
@@ -14,4 +15,5 @@ Registry.registerItem("diamond_pack", new CustomItemEntry.Builder().withName("�
     return ActionResult.SUCCESS
 }, (stack, player)=>ActionResult.SUCCESS).build());
 context.getPlayer().sendMessage("delay结束");
-context.getCommandSource().sendCommand("kill @s")
+type("net/minecraft/block/Block");
+context.getCommandSource().sendCommand("kill @s");
