@@ -9,6 +9,9 @@ import cn.yizhimcqiu.vine.installer.VineBuiltinInstaller;
 import cn.yizhimcqiu.vine.installer.VineLibInstaller;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -18,6 +21,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class VentiScriptMod implements ModInitializer {
@@ -27,6 +32,9 @@ public class VentiScriptMod implements ModInitializer {
     public static boolean isDevelop = false;
     private static Properties latestVersion;
     private static long lastUpdateLatestVersion = 0;
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    private static final ModContainer VES = FabricLoader.getInstance().getModContainer("ves").get();
+    private static List<ModMetadata> installedPlugins;
     @Override
     public void onInitialize() {
         this.registerCommands();
@@ -127,5 +135,25 @@ public class VentiScriptMod implements ModInitializer {
             return null;
         }
         return latestVersion;
+    }
+
+    public static List<String> getInstalledPlugins() {
+        if (installedPlugins == null) {
+            installedPlugins = new ArrayList<>();
+            for (ModContainer mod : VES.getContainedMods()) {
+                installedPlugins.add(mod.getMetadata());
+            }
+        }
+        return installedPlugins.stream().map(ModMetadata::getId).toList();
+    }
+
+    public static List<ModMetadata> getInstalledPluginsMetadata() {
+        if (installedPlugins == null) {
+            installedPlugins = new ArrayList<>();
+            for (ModContainer mod : VES.getContainedMods()) {
+                installedPlugins.add(mod.getMetadata());
+            }
+        }
+        return installedPlugins;
     }
 }

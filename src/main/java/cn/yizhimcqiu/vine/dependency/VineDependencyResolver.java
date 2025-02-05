@@ -1,6 +1,7 @@
 package cn.yizhimcqiu.vine.dependency;
 
 import cn.yizhimcqiu.ves.VESManifest;
+import cn.yizhimcqiu.ves.VentiScriptMod;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import cn.yizhimcqiu.ves.util.ListUtil;
 
@@ -25,6 +26,7 @@ public class VineDependencyResolver {
                     missingDependencies.add(dependency);
                 }
             }
+            missingDependencies.removeAll(VentiScriptMod.getInstalledPlugins());
             return missingDependencies;
         }
         return null;

@@ -15,5 +15,7 @@
     "vine.errorMessage.reference_error": "If there is a problem with the script, or there is a very unlikely version problem, please contact the script developer.",
 
     "title.ves_update_available": "VES has update available",
-    "title.ves_update_text": "%s : %s, Please go to Gitee to check"
+    "title.ves_update_text": "%s : %s, Please go to Gitee to check",
+
+    "info.installed_plugins": "Installed VES plugins: "
 }
