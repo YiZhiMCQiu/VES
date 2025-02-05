@@ -29,10 +29,10 @@ public class VentiScriptMod implements ModInitializer {
     private static long lastUpdateLatestVersion = 0;
     @Override
     public void onInitialize() {
-        before();
-
         this.registerCommands();
         this.updateEnvironment();
+
+        before();
 
         VEScriptExecutor.initialize();
         VESDataComponentTypes.initialize();
