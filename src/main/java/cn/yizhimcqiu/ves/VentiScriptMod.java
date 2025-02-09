@@ -37,10 +37,10 @@ public class VentiScriptMod implements ModInitializer {
     private static List<ModMetadata> installedPlugins;
     @Override
     public void onInitialize() {
-        this.registerCommands();
-        this.updateEnvironment();
+        this.registerCommands(); // 注册execscript和ves指令
+        this.updateEnvironment(); // 检测环境
 
-        before();
+        before(); // 做一些加载前的事
 
         VEScriptExecutor.initialize();
         VESDataComponentTypes.initialize();
