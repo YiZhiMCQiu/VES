@@ -2,5 +2,8 @@
     "id": "awa",
     "name": "测试",
     "version": "0.0.1",
-    "description": "AWA!"
+    "description": "AWA!",
+    "items": [
+        "test"
+    ]
 }

@@ -8,6 +8,7 @@ export const Color = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptChatColor"
 export const Registry = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptRegistry")
 export const CustomItemEntry = Java.type("cn.yizhimcqiu.ves.ci.CustomItemManager").CustomItemEntry
 export const ActionResult = Java.type("cn.yizhimcqiu.ves.scriptSupport.ScriptActionResults")
+export const ScriptUtil = Java.type("cn.yizhimcqiu.ves.util.ScriptUtil")
 
 export class CommandExecuteContext {
     constructor(instance) {
@@ -103,8 +104,3 @@ export class Player extends Entity {
         this.instance.giveItem(item, count);
     }
 }
-
-export function delay(ms) {
-    Java.type("cn.yizhimcqiu.ves.util.ScriptUtil").delay(ms);
-}
-  

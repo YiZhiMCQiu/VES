@@ -17,5 +17,7 @@
     "title.ves_update_available": "VES有更新可用",
     "title.ves_update_text": "%s ： %s，请前往Gitee查看",
 
-    "info.installed_plugins": "已加载的VES插件："
+    "info.installed_plugins": "已加载的VES插件：",
+
+    "reload-ci.success": "重载自定义物品成功"
 }

@@ -3,6 +3,8 @@ package cn.yizhimcqiu.ves.mixin;
 import cn.yizhimcqiu.ves.VentiScriptMod;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.network.ClientConnection;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ConnectedClientData;
 import net.minecraft.server.network.ServerPlayerEntity;

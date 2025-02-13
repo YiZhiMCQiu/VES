@@ -17,5 +17,7 @@
     "title.ves_update_available": "VES has update available",
     "title.ves_update_text": "%s : %s, Please go to Gitee to check",
 
-    "info.installed_plugins": "Installed VES plugins: "
+    "info.installed_plugins": "Installed VES plugins: ",
+
+    "reload-ci.success": "Reload custom items successfully"
 }

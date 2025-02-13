@@ -1,4 +1,4 @@
-import { Color, CommandExecuteContext, Registry, CustomItemEntry, Items, ActionResult, delay } from ".ves_builtin/funcapi.mjs";
+import { Color, CommandExecuteContext, Registry, CustomItemEntry, Items, ActionResult, ScriptUtil } from ".ves_builtin/funcapi.mjs";
 import { getContext } from ".ves_builtin/init.mjs";
 import { type } from ".ves_builtin/vine-extras.mjs";
 
@@ -14,5 +14,5 @@ Registry.registerItem("diamond_pack", new CustomItemEntry.Builder().withName("�
     stack.remove(1);
     return ActionResult.SUCCESS
 }, (stack, player)=>ActionResult.SUCCESS).build());
-context.getPlayer().sendMessage("delay结束");
-type("net.minecraft.block.Block");
+// type("net.minecraft.block.Block");
+ScriptUtil.stackTrace();

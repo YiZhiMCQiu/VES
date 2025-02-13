@@ -3,6 +3,7 @@ package cn.yizhimcqiu.ves;
 import net.minecraft.text.Text;
 
 import java.nio.file.Path;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class VESManifest {
@@ -12,6 +13,7 @@ public class VESManifest {
     public String description = "";
     public String icon;
     public String[] requires;
+    public List<String> items;
     public Text getNameAsText() {
         return Text.of(this.name);
     }

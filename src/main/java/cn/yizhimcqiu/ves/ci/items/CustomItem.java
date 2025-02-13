@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+@Deprecated
 public class CustomItem extends Item {
     public CustomItem(Settings settings) {
         super(settings);

@@ -2,7 +2,9 @@ package cn.yizhimcqiu.ves;
 
 import cn.yizhimcqiu.ves.ci.CustomItemManager;
 import cn.yizhimcqiu.ves.commands.ExecuteScriptCommand;
+import cn.yizhimcqiu.ves.commands.ReloadCICommand;
 import cn.yizhimcqiu.ves.commands.VESCommand;
+import cn.yizhimcqiu.ves.core.VESItemDefinitionFinder;
 import cn.yizhimcqiu.ves.core.VEScriptExecutor;
 import cn.yizhimcqiu.ves.ci.items.components.VESDataComponentTypes;
 import cn.yizhimcqiu.vine.installer.VineBuiltinInstaller;
@@ -44,6 +46,7 @@ public class VentiScriptMod implements ModInitializer {
 
         VEScriptExecutor.initialize();
         VESDataComponentTypes.initialize();
+        VESItemDefinitionFinder.findAndRegisterAll();
         CustomItemManager.initialize();
     }
 
@@ -59,6 +62,7 @@ public class VentiScriptMod implements ModInitializer {
     private void registerCommands() {
         new ExecuteScriptCommand().register();
         new VESCommand().register();
+        new ReloadCICommand().register();
     }
     public static void updateVES() {
         try {
@@ -96,6 +100,10 @@ public class VentiScriptMod implements ModInitializer {
                     > Long.parseLong(VESVersion.BUILD_TIME)) {
                 LOGGER.warn("VES has update available: {}", latestVersion.getProperty("build_time"));
             }
+        }
+
+        if (isDevelop) {
+            updateVES();
         }
     }
     private void checkVESFolder() {
