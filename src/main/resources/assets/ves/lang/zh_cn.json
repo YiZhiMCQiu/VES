@@ -19,5 +19,5 @@
 
     "info.installed_plugins": "已加载的VES插件：",
 
-    "reload-ci.success": "重载自定义物品成功"
+    "reload-ci.success": "重新加载了%d个自定义物品"
 }

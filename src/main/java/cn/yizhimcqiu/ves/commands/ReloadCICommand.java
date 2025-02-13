@@ -11,7 +11,7 @@ public class ReloadCICommand {
         CommandRegistrationCallback.EVENT.register((dispatcher, access, env) -> dispatcher.register(literal("reload-ci")
                 .requires(source -> source.hasPermissionLevel(2))
                 .executes(context -> {
-                    VESItemDefinitionFinder.reload();
+                    VESItemDefinitionFinder.findAndRegisterAll();
                     context.getSource().sendFeedback(() -> Text.translatable("reload-ci.success", VESItemDefinitionFinder.REGISTERED_ITEMS.size()), true);
                     return 1;
                 })));

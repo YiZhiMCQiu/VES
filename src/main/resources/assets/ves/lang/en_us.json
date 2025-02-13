@@ -19,5 +19,5 @@
 
     "info.installed_plugins": "Installed VES plugins: ",
 
-    "reload-ci.success": "Reload custom items successfully"
+    "reload-ci.success": "Reloaded %d custom items"
 }

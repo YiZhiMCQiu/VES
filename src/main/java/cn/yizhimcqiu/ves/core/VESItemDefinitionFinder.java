@@ -60,8 +60,12 @@ public class VESItemDefinitionFinder {
     private static void registerItem(String namespace, String item) {
         try {
             RegisteredCustomItem registeredCustomItem = new RegisteredCustomItem(getEntryByItemId(namespace, item));
-            Registry.register(Registries.ITEM, Identifier.of(namespace, item), registeredCustomItem);
-            REGISTERED_ITEMS.put(namespace + "::" + item, registeredCustomItem);
+            if (REGISTERED_ITEMS.containsKey(namespace + "::" + item)) {
+                REGISTERED_ITEMS.get(namespace + "::" + item).entry = registeredCustomItem.entry;
+            } else {
+                Registry.register(Registries.ITEM, Identifier.of(namespace, item), registeredCustomItem);
+                REGISTERED_ITEMS.put(namespace + "::" + item, registeredCustomItem);
+            }
         } catch (IOException e) {
             LOGGER.error("Error while reading item definition file!", e);
         }
