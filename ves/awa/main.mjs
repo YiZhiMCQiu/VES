@@ -9,8 +9,8 @@ if (IS_DEVELOP) {
 
 const context = getContext();
 context.getPlayer().sendMessage(Color.BLUE+"["+"AWA"+"] "+Color.GREEN+"脚本已加载, 环境情况:"+options)
-Registry.registerItem("diamond_pack", new CustomItemEntry.Builder().withName("钻石礼包").withDescription("右键获得钻石x64").withTexture(Items.DIAMOND).onUse((stack, player)=>{
-    player.giveItem(Items.DIAMOND, 64)
+Registry.registerItem("awa", "diamond_pack", new CustomItemEntry.Builder().withName("钻石礼包").withDescription("右键获得钻石x64").withTexture(Items.DIAMOND).onUse((stack, player)=>{
+    player.giveItem(Items.parse("diamond"), 64)
     stack.remove(1);
     return ActionResult.SUCCESS
 }, (stack, player)=>ActionResult.SUCCESS).build());

@@ -22,7 +22,7 @@ public class VESCommandHandler {
             List<String> md; // 缺失的依赖项列表
             if ((md = VineDependencyResolver.getMissingDependencies(sid)) != null) {
                 context.getSource().sendMessage(
-                        Text.of(Vine.PREFIX+"缺失以下依赖项: "+String.join(", ", md)));
+                        Vine.PREFIX_TEXT.append(Text.translatable("vine.missing_dependencies"+String.join(", ", md))));
                 return;
             }
             ScriptExecuteContext ctx = new ScriptExecuteContext(context.getSource().getPlayer(), context.getSource()); // 创建脚本执行上下文

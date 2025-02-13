@@ -13,6 +13,7 @@
     "vine.errorMessage.error_reading": "It is very likely that the instruction is called abnormally. Normally, you should only call the script in the suggestion list.",
     "vine.errorMessage.not_happened": "The Vine error processor was triggered, and it seems that no error occurred, or an unexpected error occurred?",
     "vine.errorMessage.reference_error": "If there is a problem with the script, or there is a very unlikely version problem, please contact the script developer.",
+    "vine.missing_dependencies": "Those depencencies are missing: %s",
 
     "title.ves_update_available": "VES has update available",
     "title.ves_update_text": "%s : %s, Please go to Gitee to check",

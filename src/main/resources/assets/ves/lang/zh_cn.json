@@ -13,6 +13,7 @@
     "vine.errorMessage.error_reading": "极大概率是指令调用不正常，你只应该调用Tab列表里的脚本",
     "vine.errorMessage.not_happened": "Vine错误处理器被触发，看起来并没有错误发生，或者出现了意料之外的错误?",
     "vine.errorMessage.reference_error": "可能是因为缺少依赖或版本不正确导致的错误",
+    "vine.missing_dependencies": "缺失以下依赖项：%s",
 
     "title.ves_update_available": "VES有更新可用",
     "title.ves_update_text": "%s ： %s，请前往Gitee查看",

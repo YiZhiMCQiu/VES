@@ -71,6 +71,16 @@ public class VESItemDefinitionFinder {
         }
     }
 
+    public static void registerItem(String namespace, String item, CustomItemManager.CustomItemEntry entry) {
+        RegisteredCustomItem registeredCustomItem = new RegisteredCustomItem(entry);
+        if (REGISTERED_ITEMS.containsKey(namespace + "::" + item)) {
+            REGISTERED_ITEMS.get(namespace + "::" + item).entry = entry;
+        } else {
+            Registry.register(Registries.ITEM, Identifier.of(namespace, item), registeredCustomItem);
+            REGISTERED_ITEMS.put(namespace + "::" + item, registeredCustomItem);
+        }
+    }
+
     private static CustomItemManager.CustomItemEntry getEntryByItemId(String namespace, String item) throws IOException {
         File file = VEScriptExecutor.VES_PATH.resolve(namespace).resolve(item + ".mjs").toFile();
         if (!file.exists()) {
