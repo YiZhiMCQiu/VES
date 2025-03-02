@@ -1,6 +1,6 @@
-import { Color, CommandExecuteContext, Registry, CustomItemEntry, Items, ActionResult, ScriptUtil } from ".ves_builtin/funcapi.mjs";
+import { Color, CommandExecuteContext, Registry, CustomItemEntry, Items, Blocks, ActionResult, ScriptUtil } from ".ves_builtin/funcapi.mjs";
 import { getContext } from ".ves_builtin/init.mjs";
-import { type } from ".ves_builtin/vine-extras.mjs";
+import { PlayerPlaceBlockEvent } from ".ves_builtin/event.mjs";
 
 var options = [];
 if (IS_DEVELOP) {
@@ -16,3 +16,10 @@ Registry.registerItem("awa", "diamond_pack", new CustomItemEntry.Builder().withN
 }, (stack, player)=>ActionResult.SUCCESS).build());
 // type("net.minecraft.block.Block");
 ScriptUtil.stackTrace();
+
+PlayerPlaceBlockEvent.on(e => {
+    if (e.block.equals(Blocks.parse("tnt"))) {
+        e.player.sendMessage("违禁物品 禁止使用！");
+        //e.cancel();
+    }
+})

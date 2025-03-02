@@ -20,7 +20,10 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-@Deprecated
+/**
+ * @deprecated 使用RegisteredCustomItem代替
+ */
+@Deprecated(forRemoval = true)
 public class CustomItem extends Item {
     public CustomItem(Settings settings) {
         super(settings);

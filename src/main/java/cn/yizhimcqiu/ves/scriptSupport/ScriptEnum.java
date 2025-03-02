@@ -10,4 +10,9 @@ public abstract class ScriptEnum {
     public Identifier getIdentifier() {
         return identifier;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ScriptEnum scriptEnum && identifier.equals(scriptEnum.identifier);
+    }
 }

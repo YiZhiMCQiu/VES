@@ -4,7 +4,7 @@ import cn.yizhimcqiu.ves.annotations.VESCallIgnore;
 import cn.yizhimcqiu.ves.ci.items.CustomItem;
 import net.minecraft.item.ItemStack;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("removal")
 public class ScriptItemStack {
     private ScriptItemType item;
     private int count;
